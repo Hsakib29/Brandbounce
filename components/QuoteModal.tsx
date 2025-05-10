@@ -90,8 +90,17 @@ export function QuoteModal() {
         animate={{ opacity: 1, scale: 1 }}
         className="relative w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-white/10"
       >
-        {/* Modal content */}
+        <button 
+          onClick={closeModal}
+          className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          aria-label="Close modal"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
         <div className="p-6">
+          <h2 className="text-xl font-bold mb-4 text-center">Request a Quote</h2>
+          
           {errors.form && (
             <div className="mb-4 p-3 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100 rounded-lg">
               {errors.form}
@@ -100,7 +109,19 @@ export function QuoteModal() {
 
           {isSubmitted ? (
             <div className="text-center py-6">
-              {/* Success message */}
+              <div className="text-green-500 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-medium mb-2">Thank you for your request!</h3>
+              <p className="text-gray-600 dark:text-gray-300">We'll get back to you soon.</p>
+              <button
+                onClick={closeModal}
+                className="mt-4 px-4 py-2 bg-brand-blue text-white rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                Close
+              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -134,7 +155,40 @@ export function QuoteModal() {
                 />
               </div>
 
-              {/* Similar error handling for other fields */}
+              <div>
+                <label htmlFor="service" className="block text-sm font-medium mb-1">
+                  Service* {errors.service && <span className="text-red-500 text-xs"> - {errors.service}</span>}
+                </label>
+                <select
+                  id="service"
+                  className={`w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 ${
+                    errors.service ? 'border-red-500 focus:ring-red-500' : 'focus:ring-brand-blue'
+                  }`}
+                  value={formData.service}
+                  onChange={(e) => setFormData({...formData, service: e.target.value})}
+                >
+                  <option value="">Select a service</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Mobile App Development">Mobile App Development</option>
+                  <option value="UI/UX Design">UI/UX Design</option>
+                  <option value="Consulting">Consulting</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="details" className="block text-sm font-medium mb-1">
+                  Project Details* {errors.details && <span className="text-red-500 text-xs"> - {errors.details}</span>}
+                </label>
+                <textarea
+                  id="details"
+                  rows={4}
+                  className={`w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 ${
+                    errors.details ? 'border-red-500 focus:ring-red-500' : 'focus:ring-brand-blue'
+                  }`}
+                  value={formData.details}
+                  onChange={(e) => setFormData({...formData, details: e.target.value})}
+                ></textarea>
+              </div>
 
               <motion.button
                 whileHover={{ scale: 1.02 }}
