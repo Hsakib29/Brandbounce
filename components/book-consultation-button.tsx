@@ -1,0 +1,179 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Calendar, X } from "lucide-react"
+
+const BookConsultationButton = () => {
+  const [isVisible, setIsVisible] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+
+  useEffect(() => {
+    // Show the button after 3 seconds
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <>
+      <AnimatePresence>
+        {isVisible && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 100 }}
+            transition={{ type: "spring", stiffness: 50, damping: 15 }}
+            className="fixed bottom-6 right-6 z-50"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <motion.div
+              className="bg-brand-orange text-white rounded-full shadow-lg flex items-center overflow-hidden"
+              initial={{ width: "48px" }}
+              animate={{
+                width: isHovered ? "auto" : "48px",
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 30,
+                mass: 0.8,
+              }}
+            >
+              <button onClick={() => setIsOpen(true)} className="h-12 flex items-center justify-center">
+                <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
+                  <Calendar className="w-5 h-5" />
+                </div>
+                <AnimatePresence>
+                  {isHovered && (
+                    <motion.span
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: "auto" }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
+                      className="font-medium whitespace-nowrap pr-4"
+                    >
+                      Let's Bounce Ideas—Book Now!
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 50, damping: 15 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 w-full max-w-md relative">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <h3 className="text-2xl font-bold mb-4 text-[#0a2540] dark:text-white">Book Your Free Consultation</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Ready to bounce some ideas around? Schedule a free 30-minute consultation with our team to discuss your
+                project.
+              </p>
+
+              <form className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
+                    placeholder="John Doe"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Your Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
+                    placeholder="john@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="date" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Preferred Date
+                  </label>
+                  <input
+                    type="date"
+                    id="date"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="time" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Preferred Time
+                  </label>
+                  <select
+                    id="time"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="">Select a time</option>
+                    <option value="9:00">9:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="13:00">1:00 PM</option>
+                    <option value="14:00">2:00 PM</option>
+                    <option value="15:00">3:00 PM</option>
+                    <option value="16:00">4:00 PM</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    What would you like to discuss?
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={3}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
+                    placeholder="Tell us a bit about your project..."
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-brand-blue text-white py-3 rounded-md font-medium hover:bg-opacity-90 transition-colors"
+                >
+                  Book My Free Consultation
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
+
+export default BookConsultationButton

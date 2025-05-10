@@ -1,0 +1,78 @@
+"use client"
+
+import { motion } from "framer-motion"
+import ProjectCarousel from "./project-carousel"
+import { BlurFade } from "./blur-fade"
+
+const projects = [
+  {
+    title: "Sunrise Cafe Rebrand",
+    category: "Brand Identity",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    title: "TechStart Social Campaign",
+    category: "Social Media",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    title: "Bloom Boutique Logo",
+    category: "Logo Design",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    title: "Fitness First Promo Video",
+    category: "Video Editing",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+  {
+    title: "Urban Eats Menu Design",
+    category: "Print Design",
+    image: "/placeholder.svg?height=600&width=800",
+  },
+]
+
+const OurWork = () => {
+  return (
+    <section id="work" className="py-20 bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <div className="inline-block">
+            <div className="group rounded-full border border-black/5 dark:border-white/5 bg-white dark:bg-gray-800 text-base transition-all ease-in hover:cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700">
+              <div className="relative overflow-hidden rounded-full">
+                <h2 className="inline-flex items-center justify-center px-4 py-1 text-sm uppercase tracking-wider text-brand-blue transition ease-out">
+                  Our Portfolio
+                </h2>
+                <div className="absolute inset-0 z-0">
+                  <div className="animate-[shine_3s_ease-in-out_infinite] absolute -inset-[100%] h-[500%] w-[50%] -rotate-45 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 className="text-3xl md:text-4xl font-bold mb-4 text-[#0a2540] dark:text-white">
+            Showcasing Our Most Remarkable Creations
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
+            A showcase of projects that embody creativity, innovation, and precision.
+          </p>
+        </div>
+
+        <BlurFade delay={0.2} inView className="max-w-4xl mx-auto">
+          <ProjectCarousel projects={projects} />
+        </BlurFade>
+
+        <div className="text-center mt-12">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="btn-outline px-6 py-3 rounded-full font-medium"
+          >
+            View All Projects
+          </motion.button>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default OurWork
