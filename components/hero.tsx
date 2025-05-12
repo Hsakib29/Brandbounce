@@ -21,8 +21,8 @@ const Hero = () => {
         {/* Mobile-only image above the text */}
         <div className="block md:hidden relative z-20 mb-8">
           <HoverFadeImages
-            imageA="/images/hoverimage1.png"
-            imageB="/images/hoverimage2.png"
+            imageA="/images/hoverimage1.webp"
+            imageB="/images/hoverimage2.webp"
           />
         </div>
 
