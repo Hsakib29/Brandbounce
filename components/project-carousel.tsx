@@ -58,6 +58,7 @@ const ProjectCarousel = ({ projects }: ProjectCarouselProps) => {
               alt={project.title}
               fill
               className="object-cover rounded-xl"
+              onError={(e) => console.log(`Image load error for ${project.image}`, e)}
             />
           </div>
         </label>

@@ -94,14 +94,12 @@ const Hero = () => {
 
           {/* Desktop-only image beside text */}
           <div className="hidden md:block md:w-1/2">
-            <BlurFade delay={0.5} inView>
-              <div className="relative h-[400px] w-full">
-                <HoverFadeImages
-                  imageA="/images/hoverimage1.webp"
-                  imageB="/images/hoverimage2.webp"
-                />
-              </div>
-            </BlurFade>
+            <div className="relative h-[300px] w-full flex justify-center items-center">
+              <HoverFadeImages
+                imageA="/images/hoverimage1.webp"
+                imageB="/images/hoverimage2.webp"
+              />
+            </div>
           </div>
         </div>
 
@@ -116,7 +114,7 @@ const Hero = () => {
             <div className="logo-ticker-wrapper w-full overflow-hidden">
               <div className="logo-ticker-container w-screen">
                 <div className="flex items-center logo-ticker space-x-8 py-4 animate-ticker">
-                  {[...Array(50)].flatMap((_, repeatIndex) =>
+                  {[...Array(3)].flatMap((_, repeatIndex) =>
                     [...Array(8)].map((_, index) => (
                       <div
                         key={`${repeatIndex}-${index}`}

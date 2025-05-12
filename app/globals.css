@@ -126,7 +126,7 @@ body {
 
 .logo-ticker {
   display: flex;
-  animation: ticker 400s linear infinite; /* Adjust speed as needed */
+  animation: ticker 100s linear infinite; /* Adjust speed as needed */
   width: max-content; /* Ensures the content spans beyond the container */
   flex-shrink: 0; /* Prevents the ticker from shrinking */
 }
