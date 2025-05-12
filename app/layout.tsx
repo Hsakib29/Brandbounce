@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModalProvider } from "@/components/ModalContext"; // New import
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -84,6 +85,7 @@ export default function RootLayout({
             {" "}
             {/* Wrap children with ModalProvider */}
             {children}
+            <SpeedInsights />
           </ModalProvider>
         </ThemeProvider>
       </body>

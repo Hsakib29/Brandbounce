@@ -92,9 +92,13 @@ export function QuoteModal() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="relative w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-white/10"
+        role="dialog"
+        aria-labelledby="quote-modal-title"
+        aria-modal="true"
       >
         <button
           onClick={closeModal}
+          type="button"
           className="absolute top-4 right-4 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           aria-label="Close modal"
         >
@@ -102,7 +106,7 @@ export function QuoteModal() {
         </button>
 
         <div className="p-6">
-          <h2 className="text-xl font-bold mb-4 text-center">
+          <h2 id="quote-modal-title" className="text-xl font-bold mb-4 text-center">
             Request a Quote
           </h2>
 
@@ -138,7 +142,9 @@ export function QuoteModal() {
               </p>
               <button
                 onClick={closeModal}
+                type="button"
                 className="mt-4 px-4 py-2 bg-brand-blue text-white rounded-lg hover:bg-blue-600 transition-colors"
+                aria-label="Close confirmation message"
               >
                 Close
               </button>
@@ -170,6 +176,8 @@ export function QuoteModal() {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
+                  aria-describedby={errors.name ? "name-error" : undefined}
+                  aria-invalid={!!errors.name}
                 />
               </div>
 
@@ -198,6 +206,8 @@ export function QuoteModal() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
+                  aria-describedby={errors.email ? "email-error" : undefined}
+                  aria-invalid={!!errors.email}
                 />
               </div>
 
@@ -225,6 +235,8 @@ export function QuoteModal() {
                   onChange={(e) =>
                     setFormData({ ...formData, service: e.target.value })
                   }
+                  aria-describedby={errors.service ? "service-error" : undefined}
+                  aria-invalid={!!errors.service}
                 >
                   <option value="">Select a service</option>
                   <option value="Brand Identity Design">
@@ -267,6 +279,8 @@ export function QuoteModal() {
                   onChange={(e) =>
                     setFormData({ ...formData, details: e.target.value })
                   }
+                  aria-describedby={errors.details ? "details-error" : undefined}
+                  aria-invalid={!!errors.details}
                 ></textarea>
               </div>
 
@@ -276,6 +290,7 @@ export function QuoteModal() {
                 type="submit"
                 disabled={isLoading}
                 className="btn-primary w-full py-2 rounded-lg flex items-center justify-center"
+                aria-label="Request a quote"
               >
                 {isLoading ? (
                   <>

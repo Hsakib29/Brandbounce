@@ -4,13 +4,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
-import { useModal } from "@/components/ModalContext"; // Changed import
+import { useModal } from "@/components/ModalContext";
 import Image from "next/image";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { openModal } = useModal(); // Get openModal from context
+  const { openModal } = useModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +41,7 @@ const Header = () => {
             transition={{ type: "spring", stiffness: 120, delay: 0.1 }}
             className="mr-2"
           >
-            <img
+            <Image
               src="/bbicon.gif"
               alt="Brand Logo"
               width={60}
@@ -86,8 +86,10 @@ const Header = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={openModal} // Use openModal from context
+            onClick={openModal}
+            type="button"
             className="btn-primary px-6 py-2 rounded-full font-medium shadow-lg"
+            aria-label="Get a quote for our services"
           >
             Get a quote
           </motion.button>
@@ -97,8 +99,10 @@ const Header = () => {
         <div className="md:hidden flex items-center space-x-4">
           <ThemeToggle />
           <button
+            type="button"
             className="text-gray-800 dark:text-gray-200"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -149,7 +153,9 @@ const Header = () => {
                 openModal();
                 setMobileMenuOpen(false);
               }}
+              type="button"
               className="btn-primary px-6 py-2 rounded-full font-medium shadow-lg"
+              aria-label="Get a quote for our services"
             >
               Get a quote
             </motion.button>
