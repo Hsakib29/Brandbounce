@@ -8,30 +8,30 @@ const projects = [
   {
     title: "ZuperMart",
     category: "Brand Identity",
-    image: "/images/project1.webp?height=600&width=800",
+    image: "/images/Project1.webp?height=600&width=800",
   },
   {
     title: "Visa Ground",
     category: "Social Media Design & Branding",
-    image: "/images/project2.webp?height=600&width=800",
+    image: "/images/Project2.webp?height=600&width=800",
     textColor: "Black",
   },
   {
     title: "Baseballturtles.com",
     category: "Video Editing",
-    image: "/images/project3.webp?height=600&width=800",
+    image: "/images/Project3.webp?height=600&width=800",
     textColor: "Black",
   },
   {
     title: "ALC",
     category: "Logo Design",
-    image: "/images/project4.webp?height=600&width=800",
+    image: "/images/Project4.webp?height=600&width=800",
     textColor: "Black",
   },
   {
     title: "Lovely Weddings",
     category: "Signage Design",
-    image: "/images/project5.webp?height=600&width=800",
+    image: "/images/Project5.webp?height=600&width=800",
     textColor: "Black",
   },
 ];
