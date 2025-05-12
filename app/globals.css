@@ -32,7 +32,9 @@
 
   --animation-timing: 27s;
   --carousel-items: 6;
-  --animation-delay-fraction: calc(var(--animation-timing) / var(--carousel-items));
+  --animation-delay-fraction: calc(
+    var(--animation-timing) / var(--carousel-items)
+  );
   --animation-steps-fraction: calc(100 / var(--carousel-items));
   --slide-change-timing: 3;
   --radius: 0.5rem;
@@ -81,7 +83,11 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, var(--primary-blue), var(--primary-orange));
+  background: linear-gradient(
+    90deg,
+    var(--primary-blue),
+    var(--primary-orange)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -114,32 +120,19 @@ body {
 .logo-ticker-container {
   position: relative;
   overflow: hidden;
-  width: 100%;
-}
-
-.logo-ticker-container::before,
-.logo-ticker-container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100px;
-  height: 100%;
-  z-index: 2;
-}
-
-.logo-ticker-container::before {
-  left: 0;
-  background: linear-gradient(to right, hsl(var(--background)), transparent);
-}
-
-.logo-ticker-container::after {
-  right: 0;
-  background: linear-gradient(to left, hsl(var(--background)), transparent);
+  width: 100vw; /* Full width of the viewport */
+  height: 80px; /* Adjust height as needed */
 }
 
 .logo-ticker {
-  animation: ticker 20s linear infinite;
   display: flex;
+  animation: ticker 400s linear infinite; /* Adjust speed as needed */
+  width: max-content; /* Ensures the content spans beyond the container */
+  flex-shrink: 0; /* Prevents the ticker from shrinking */
+}
+
+.logo-item {
+  margin-right: 20px; /* Space between logos */
 }
 
 @keyframes ticker {
@@ -269,11 +262,15 @@ body {
 }
 
 .faq-item.active {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .dark .faq-item.active {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
 /* Service category cards */
@@ -327,7 +324,9 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    opacity 0.4s ease;
   cursor: pointer;
   border-radius: 10px;
   overflow: hidden;

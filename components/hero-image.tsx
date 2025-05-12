@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 interface HoverFadeImagesProps {
-  imageA: string
-  imageB: string
+  imageA: string;
+  imageB: string;
 }
 
 export function HoverFadeImages({ imageA, imageB }: HoverFadeImagesProps) {
-  const [hovered, setHovered] = useState(false)
+  const [hovered, setHovered] = useState(false);
 
   return (
     <div
@@ -30,5 +30,5 @@ export function HoverFadeImages({ imageA, imageB }: HoverFadeImagesProps) {
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
       />
     </div>
-  )
+  );
 }

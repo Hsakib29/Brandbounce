@@ -1,40 +1,61 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Send, Mail, Phone, MapPin } from "lucide-react"
-import { BlurFade } from "./blur-fade"
-import { BorderBeam } from "./border-beam"
+import type React from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, Mail, Phone, MapPin } from "lucide-react";
+import { BlurFade } from "./blur-fade";
+import { BorderBeam } from "./border-beam";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
-  })
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    setIsSubmitted(true)
-    setFormData({ name: "", email: "", message: "" })
-    setTimeout(() => setIsSubmitted(false), 5000)
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mpwdyalk", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", phone: "", message: "" });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        throw new Error("Failed to send the message. Please try again.");
+      }
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "An unexpected error occurred.",
+      );
+    }
+  };
 
   return (
     <section id="contact" className="py-20 relative bg-white dark:bg-gray-900">
-      {/* Background circles - moved to same stacking context */}
+      {/* Background circles */}
       <div className="absolute inset-0 overflow-hidden z-0">
-        {/* Blue circle */}
         <div className="absolute top-[45%] right-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-gradient-to-br from-brand-blue to-blue-500 opacity-80 translate-x-1/20 -translate-y-1/2"></div>
-
-        {/* Orange circle */}
         <div className="absolute bottom-[30%] left-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-gradient-to-br from-brand-orange to-yellow-500 opacity-80 -translate-x-1/20 translate-y-1/2"></div>
       </div>
 
@@ -56,7 +77,8 @@ const Contact = () => {
             Let's Start Your Brand Journey
           </h3>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Ready to give your brand the bounce it needs? Get in touch with us today to discuss your project.
+            Ready to give your brand the bounce it needs? Get in touch with us
+            today to discuss your project.
           </p>
         </div>
 
@@ -64,9 +86,17 @@ const Contact = () => {
           <div className="lg:w-1/2">
             <BlurFade delay={0.1} inView className="h-full">
               <div className="relative glass-effect rounded-xl p-8 h-full overflow-hidden">
-                <BorderBeam size={80} colorFrom="#1E90FF" colorTo="#0066CC" duration={8} initialOffset={20} />
+                <BorderBeam
+                  size={80}
+                  colorFrom="#1E90FF"
+                  colorTo="#0066CC"
+                  duration={8}
+                  initialOffset={20}
+                />
                 <div className="relative z-20">
-                  <h4 className="text-2xl font-bold mb-6 text-brand-blue dark:text-white">Get in Touch</h4>
+                  <h4 className="text-2xl font-bold mb-6 text-brand-blue dark:text-white">
+                    Get in Touch
+                  </h4>
 
                   {isSubmitted ? (
                     <motion.div
@@ -78,8 +108,13 @@ const Contact = () => {
                       <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Send size={24} className="text-green-600" />
                       </div>
-                      <h5 className="text-xl font-bold mb-2 text-white">Message Sent!</h5>
-                      <p className="text-gray-300">Thank you for reaching out. We'll get back to you shortly!</p>
+                      <h5 className="text-xl font-bold mb-2 text-white">
+                        Message Sent!
+                      </h5>
+                      <p className="text-gray-300">
+                        Thank you for reaching out. We'll get back to you
+                        shortly!
+                      </p>
                     </motion.div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -122,7 +157,31 @@ const Contact = () => {
                       </div>
 
                       <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label
+                          htmlFor="phone"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                        >
+                          Your Phone Number (Optional)
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
+                          placeholder="+44 123 456 7890"
+                        />
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                          Prefer a call? Leave your number, and we’ll reach out within 24 hours!
+                        </p>
+                      </div>
+
+                      <div>
+                        <label
+                          htmlFor="message"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                        >
                           Your Message
                         </label>
                         <textarea
@@ -136,6 +195,12 @@ const Contact = () => {
                           placeholder="Tell us about your project..."
                         ></textarea>
                       </div>
+
+                      {error && (
+                        <p className="text-red-500 text-sm text-center">
+                          {error}
+                        </p>
+                      )}
 
                       <motion.button
                         whileHover={{ scale: 1.02 }}
@@ -157,7 +222,7 @@ const Contact = () => {
 
           <div className="lg:w-1/2">
             <BlurFade delay={0.3} inView className="h-full">
-              <div className="relative glass-effect rounded-xl p-8 h-full overflow-hidden">
+              <div className="relative glass-effect rounded-xl p-8 h-full overflow-hidden flex flex-col justify-center">
                 <BorderBeam
                   size={80}
                   colorFrom="#FF6200"
@@ -167,41 +232,53 @@ const Contact = () => {
                   reverse={true}
                 />
                 <div className="relative z-20">
-                  <h4 className="text-2xl font-bold mb-6 text-brand-orange dark:text-white">Contact Information</h4>
+                  <h4 className="text-2xl font-bold mb-6 text-brand-orange dark:text-white">
+                    Contact Information
+                  </h4>
 
                   <div className="space-y-8">
-                    <div className="flex items-start">
+                    <div className="flex items-start p-4 rounded-lg">
                       <div className="w-12 h-12 bg-brand-blue/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                         <Mail size={20} className="text-brand-blue" />
                       </div>
                       <div>
-                        <h5 className="font-bold mb-1 text-gray-900 dark:text-white">Email Us</h5>
-                        <p className="text-gray-600 dark:text-gray-300 mb-1">For general inquiries:</p>
-                        <a href="mailto:info@brandbounce.com" className="text-brand-blue hover:underline">
+                        <h5 className="font-bold mb-2 text-gray-900 dark:text-white text-lg">
+                          Email Us
+                        </h5>
+                        <p className="text-gray-600 dark:text-gray-300 mb-2 text-sm">
+                          For general inquiries:
+                        </p>
+                        <a
+                          href="mailto:info@brandbounce.com"
+                          className="text-brand-blue hover:underline text-lg font-semibold"
+                        >
                           info@brandbounce.com
                         </a>
                       </div>
                     </div>
 
-                    <div className="flex items-start">
+                    <div className="flex items-start p-4 rounded-lg">
                       <div className="w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                        <Phone size={20} className="text-brand-orange" />
+                        <Send size={20} className="text-brand-orange" />
                       </div>
                       <div>
-                        <h5 className="font-bold mb-1 text-gray-900 dark:text-white">Call Us</h5>
-                        <p className="text-gray-600 dark:text-gray-300 mb-1">Monday to Friday, 9am to 5pm:</p>
-                        <a href="tel:+441234567890" className="text-brand-blue hover:underline">
-                          +44 123 456 7890
-                        </a>
+                        <h5 className="font-bold mb-2 text-gray-900 dark:text-white text-lg">
+                          Reach Out to Us
+                        </h5>
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                          We’re a <span className="font-semibold text-brand-orange">global team</span> ready to make your brand pop! You don’t need to call us—we’ll call you. Just leave your contact info (including your phone number if you’d like a call) in the contact form, and we’ll get back to you within 24 hours.
+                        </p>
                       </div>
                     </div>
 
-                    <div className="flex items-start">
+                    <div className="flex items-start hidden">
                       <div className="w-12 h-12 bg-brand-blue/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                        <MapPin size={20} className="text-brand-blue" />
+                        <MapPin size={20} className="text-brand-blue hidden" />
                       </div>
                       <div>
-                        <h5 className="font-bold mb-1 text-gray-900 dark:text-white">Visit Us</h5>
+                        <h5 className="font-bold mb-1 text-gray-900 dark:text-white">
+                          Visit Us
+                        </h5>
                         <p className="text-gray-600 dark:text-gray-300">
                           123 Creative Street
                           <br />
@@ -214,7 +291,9 @@ const Contact = () => {
                   </div>
 
                   <div className="mt-12">
-                    <h5 className="font-bold mb-4 text-gray-900 dark:text-white">Follow Us</h5>
+                    <h5 className="font-bold mb-4 text-gray-900 dark:text-white">
+                      Follow Us
+                    </h5>
                     <div className="flex space-x-4">
                       <a
                         href="#"
@@ -251,7 +330,14 @@ const Contact = () => {
                           strokeLinejoin="round"
                           className="text-gray-600 dark:text-gray-300 hover:text-white"
                         >
-                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                          <rect
+                            x="2"
+                            y="2"
+                            width="20"
+                            height="20"
+                            rx="5"
+                            ry="5"
+                          ></rect>
                           <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                         </svg>
@@ -304,8 +390,14 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
-  )
-}
 
-export default Contact
+      <style jsx>{`
+        .hidden {
+          display: none;
+        }
+      `}</style>
+    </section>
+  );
+};
+
+export default Contact;

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useTheme } from "@/components/theme-provider"
-import { Moon, Sun } from "lucide-react"
+import { useTheme } from "@/components/theme-provider";
+import { Moon, Sun } from "lucide-react";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   return (
     <button
@@ -14,5 +14,5 @@ export function ThemeToggle() {
     >
       {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
     </button>
-  )
+  );
 }

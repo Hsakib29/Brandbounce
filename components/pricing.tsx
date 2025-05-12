@@ -1,97 +1,54 @@
-"use client"
-import { Check } from "lucide-react"
-import { BlurFade } from "./blur-fade"
+"use client";
+import { Check } from "lucide-react";
+import { BlurFade } from "./blur-fade";
 
-const individualServices = [
+const services = [
   {
-    category: "Logo Design",
+    category: "Brand Identity Design",
     color: "service-category-blue",
-    plans: [
-      {
-        title: "Basic Logo",
-        price: "£40",
-        features: ["1 logo concept", "1 round of revisions", "Final logo in PNG and JPEG", "3-5 days delivery"],
-      },
-      {
-        title: "Enhanced Logo Package",
-        price: "£120",
-        features: [
-          "2 logo concepts",
-          "2 rounds of revisions",
-          "Final logo in PNG, JPEG, SVG",
-          "Basic color palette",
-          "1-2 weeks delivery",
-        ],
-      },
+    price: "Starting at £100",
+    deliverables: [
+      "Logo concept",
+      "Color palette",
+      "Typography guide",
+      "Revision rounds",
+      "Delivery timeline",
     ],
   },
   {
-    category: "Video Editing",
+    category: "Visual Content Creation",
     color: "service-category-orange",
-    plans: [
-      {
-        title: "Basic Edit (Up to 1 Minute)",
-        price: "£30",
-        features: ["Basic cuts and transitions", "1 round of revision", "Final video in MP4", "2-4 days delivery"],
-      },
-      {
-        title: "Pro Edit (1-3 Minutes)",
-        price: "£90",
-        features: [
-          "Advanced editing (effects, audio sync)",
-          "2 rounds of revisions",
-          "Final video in MP4",
-          "4-6 days delivery",
-        ],
-      },
+    price: "Starting at £50",
+    deliverables: [
+      "Design assets",
+      "Revision rounds",
+      "Final digital files",
+      "Delivery timeline",
     ],
   },
   {
-    category: "Branding",
+    category: "Video Editing and Motion",
     color: "service-category-navy",
-    plans: [
-      {
-        title: "Basic Branding",
-        price: "£100",
-        features: ["1 logo concept", "Color palette", "Typography guide", "1 round of revision", "2-3 weeks delivery"],
-      },
-      {
-        title: "Full Branding Package",
-        price: "£300",
-        features: [
-          "2 logo concepts",
-          "Color palette",
-          "Typography guide",
-          "Business card design",
-          "2 rounds of revisions",
-          "3-4 weeks delivery",
-        ],
-      },
+    price: "Starting at £70",
+    deliverables: [
+      "Video cuts and transitions",
+      "Revision rounds",
+      "Final video file",
+      "Delivery timeline",
     ],
   },
   {
     category: "Social Media Marketing",
     color: "service-category-gray",
-    plans: [
-      {
-        title: "Monthly Starter Package",
-        price: "£70/month",
-        features: ["4 social media posts (graphics only)", "1 round of revision", "Basic schedule", "Ongoing support"],
-      },
-      {
-        title: "Growth Package",
-        price: "£200/month",
-        features: [
-          "8 posts (graphics and captions)",
-          "1 short video (up to 1 minute)",
-          "Monthly strategy call",
-          "Basic analytics",
-          "Ongoing support",
-        ],
-      },
+    price: "Starting at £90",
+    deliverables: [
+      "Social media posts",
+      "Revision rounds",
+      "Campaign schedule",
+      "Ongoing support",
     ],
   },
-]
+];
 
 const Pricing = () => {
   return (
@@ -111,40 +68,69 @@ const Pricing = () => {
             </div>
           </div>
           <h3 className="text-3xl md:text-4xl font-bold mb-4 text-[#0a2540] dark:text-white">
-            Affordable Packages Starting at Just <span className="text-brand-orange">£20</span>
+            Affordable Branding Packages{" "}
+            <span className="text-brand-orange">Tailored to Your Budget!</span>
           </h3>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            At BrandBounce, we're all about making your startup or small business pop with bold, memorable
-            designs—without breaking the bank!
+            At BrandBounce, we're all about making your startup or small
+            business pop with bold, memorable designs—without breaking the bank!
           </p>
         </div>
 
-        <div className="mb-16">
-          <h4 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">Individual Services</h4>
+        <div className="mb-16 text-center">
+          <h4 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white tracking-tight">
+            Individual Services
+          </h4>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {individualServices.map((service, index) => (
+            {services.map((service, index) => (
               <BlurFade key={index} delay={0.1 + index * 0.1} inView>
                 <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden h-full">
                   <div className={`service-category-card ${service.color}`}>
-                    <h5 className="text-white text-xl font-bold">{service.category}</h5>
+                    <h5 className="text-white text-xl font-bold">
+                      {service.category}
+                    </h5>
                   </div>
 
-                  <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {service.plans.map((plan, planIndex) => (
-                      <div key={planIndex} className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                        <h6 className="font-bold mb-2 text-gray-900 dark:text-white">{plan.title}</h6>
-                        <p className="text-2xl font-bold text-brand-blue mb-4">{plan.price}</p>
-                        <ul className="space-y-2">
-                          {plan.features.map((feature, featureIndex) => (
-                            <li key={featureIndex} className="flex items-start">
-                              <Check className="text-brand-orange mr-2 flex-shrink-0" size={18} />
-                              <span className="text-sm text-gray-700 dark:text-gray-300">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
+                  <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Left - Price Range */}
+                    <div className="flex flex-col justify-between bg-gradient-to-br from-brand-blue/10 to-white dark:from-gray-800 dark:to-gray-900 border border-brand-blue/20 dark:border-white/10 p-6 rounded-xl shadow-md">
+                      <div>
+                        <h6 className="text-lg font-semibold text-brand-blue mb-2">
+                          Price Range
+                        </h6>
+                        <p className="text-3xl font-bold text-brand-blue">
+                          {service.price}
+                        </p>
                       </div>
-                    ))}
+                      <div className="mt-4">
+                        <p className="text-sm text-gray-600 dark:text-gray-300">
+                          Choose a plan based on your needs and budget. All
+                          packages include quality assurance and timely
+                          delivery.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Right - Deliverables */}
+                    <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-6 rounded-xl shadow-sm">
+                      <h6 className="text-lg font-semibold text-brand-orange mb-4">
+                        What's Included
+                      </h6>
+                      <ul className="space-y-3">
+                        {service.deliverables.map((deliverable, i) => (
+                          <li key={i} className="flex items-start">
+                            <Check
+                              className="text-brand-orange mr-3 mt-1"
+                              size={20}
+                            />
+                            <span className="text-sm text-gray-700 dark:text-gray-200">
+                              {deliverable}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </BlurFade>
@@ -154,8 +140,12 @@ const Pricing = () => {
 
         <BlurFade delay={0.5} inView>
           <div className="bg-[#0a2540] rounded-xl shadow-xl p-8 text-white">
-            <h4 className="text-2xl font-bold mb-4">BrandBounce Bounce Starter Kit</h4>
-            <p className="mb-6">Get the full bounce with our all-in-one package—and save!</p>
+            <h4 className="text-2xl font-bold mb-4">
+              BrandBounce Bounce Starter Kit
+            </h4>
+            <p className="mb-6">
+              Get the full bounce with our all-in-one package—and save!
+            </p>
 
             <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
               <div className="flex flex-col md:flex-row justify-between items-center mb-6">
@@ -182,7 +172,10 @@ const Pricing = () => {
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>1 Month of Growth Package Social Media Marketing (£200 value)</span>
+                      <span>
+                        1 Month of Growth Package Social Media Marketing (£200
+                        value)
+                      </span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
@@ -195,11 +188,15 @@ const Pricing = () => {
                   <ul className="space-y-2">
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>Custom Quotes: Need more? Email us for a bespoke quote.</span>
+                      <span>
+                        Custom Quotes: Need more? Email us for a bespoke quote.
+                      </span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>Extra Revisions: £15 per round beyond what's included.</span>
+                      <span>
+                        Extra Revisions: £15 per round beyond what's included.
+                      </span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
@@ -213,7 +210,7 @@ const Pricing = () => {
         </BlurFade>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Pricing
+export default Pricing;

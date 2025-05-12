@@ -1,6 +1,13 @@
-"use client"
-import { Eye, Search, Wand2, Package, Sparkles, HeadphonesIcon } from "lucide-react"
-import { BlurFade } from "./blur-fade"
+"use client";
+import {
+  Eye,
+  Search,
+  Wand2,
+  Package,
+  Sparkles,
+  HeadphonesIcon,
+} from "lucide-react";
+import { BlurFade } from "./blur-fade";
 
 const processSteps = [
   {
@@ -45,7 +52,7 @@ const processSteps = [
     icon: HeadphonesIcon,
     color: "bg-brand-blue",
   },
-]
+];
 
 const Process = () => {
   return (
@@ -101,7 +108,7 @@ const Process = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Process
+export default Process;

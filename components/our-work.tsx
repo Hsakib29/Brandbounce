@@ -1,36 +1,40 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import ProjectCarousel from "./project-carousel"
-import { BlurFade } from "./blur-fade"
+import { motion } from "framer-motion";
+import ProjectCarousel from "./project-carousel";
+import { BlurFade } from "./blur-fade";
 
 const projects = [
   {
-    title: "Sunrise Cafe Rebrand",
+    title: "ZuperMart",
     category: "Brand Identity",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/project1.webp?height=600&width=800",
   },
   {
-    title: "TechStart Social Campaign",
-    category: "Social Media",
-    image: "/placeholder.svg?height=600&width=800",
+    title: "Visa Ground",
+    category: "Social Media Design & Branding",
+    image: "/images/project2.webp?height=600&width=800",
+    textColor: "Black",
   },
   {
-    title: "Bloom Boutique Logo",
-    category: "Logo Design",
-    image: "/placeholder.svg?height=600&width=800",
-  },
-  {
-    title: "Fitness First Promo Video",
+    title: "Baseballturtles.com",
     category: "Video Editing",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/images/project3.webp?height=600&width=800",
+    textColor: "Black",
   },
   {
-    title: "Urban Eats Menu Design",
-    category: "Print Design",
-    image: "/placeholder.svg?height=600&width=800",
+    title: "ALC",
+    category: "Logo Design",
+    image: "/images/project4.webp?height=600&width=800",
+    textColor: "Black",
   },
-]
+  {
+    title: "Lovely Weddings",
+    category: "Signage Design",
+    image: "/images/project5.webp?height=600&width=800",
+    textColor: "Black",
+  },
+];
 
 const OurWork = () => {
   return (
@@ -53,26 +57,17 @@ const OurWork = () => {
             Showcasing Our Most Remarkable Creations
           </h3>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-            A showcase of projects that embody creativity, innovation, and precision.
+            A showcase of projects that embody creativity, innovation, and
+            precision.
           </p>
         </div>
 
         <BlurFade delay={0.2} inView className="max-w-4xl mx-auto">
           <ProjectCarousel projects={projects} />
         </BlurFade>
-
-        <div className="text-center mt-12">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="btn-outline px-6 py-3 rounded-full font-medium"
-          >
-            View All Projects
-          </motion.button>
-        </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default OurWork
+export default OurWork;

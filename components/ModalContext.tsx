@@ -1,6 +1,6 @@
-'use client';
-import { createContext, useContext, useState, useEffect } from 'react';
-import { QuoteModal } from './QuoteModal';
+"use client";
+import { createContext, useContext, useState, useEffect } from "react";
+import { QuoteModal } from "./QuoteModal";
 
 type ModalContextType = {
   isModalOpen: boolean;
@@ -15,12 +15,12 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
 
   const openModal = () => {
     setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   };
 
   return (
@@ -34,7 +34,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
 export function useModal() {
   const context = useContext(ModalContext);
   if (!context) {
-    throw new Error('useModal must be used within a ModalProvider');
+    throw new Error("useModal must be used within a ModalProvider");
   }
   return context;
 }

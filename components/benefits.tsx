@@ -1,17 +1,27 @@
-"use client"
-import { Lightbulb, DollarSign, Users, Sparkles, Smile, Handshake, TrendingUp } from "lucide-react"
-import { BlurFade } from "./blur-fade"
-import React from "react"
+"use client";
+import {
+  Lightbulb,
+  DollarSign,
+  Users,
+  Sparkles,
+  Smile,
+  Handshake,
+  TrendingUp,
+} from "lucide-react";
+import { BlurFade } from "./blur-fade";
+import React from "react";
 
 const benefits = [
   {
     title: "Creativity That Pops",
-    description: "Bold, unique designs for logos and social media, bringing fresh ideas to every project.",
+    description:
+      "Bold, unique designs for logos and social media, bringing fresh ideas to every project.",
     icon: Lightbulb,
   },
   {
     title: "Affordable Excellence",
-    description: "High-quality design services tailored for startups and small businesses at reasonable costs.",
+    description:
+      "High-quality design services tailored for startups and small businesses at reasonable costs.",
     icon: DollarSign,
   },
   {
@@ -22,12 +32,14 @@ const benefits = [
   },
   {
     title: "Fresh Perspective",
-    description: "As a new agency, we bring innovative approaches to help your brand shine in a crowded market.",
+    description:
+      "As a new agency, we bring innovative approaches to help your brand shine in a crowded market.",
     icon: Sparkles,
   },
   {
     title: "Playful Energy",
-    description: "We infuse our projects with a fun, energetic vibe that makes them memorable and engaging.",
+    description:
+      "We infuse our projects with a fun, energetic vibe that makes them memorable and engaging.",
     icon: Smile,
   },
   {
@@ -38,10 +50,11 @@ const benefits = [
   },
   {
     title: "Growth-Focused Design",
-    description: "We aim to build a scalable brand with strategic designs that attract customers and support growth.",
+    description:
+      "We aim to build a scalable brand with strategic designs that attract customers and support growth.",
     icon: TrendingUp,
   },
-]
+];
 
 const Benefits = () => {
   return (
@@ -72,20 +85,35 @@ const Benefits = () => {
               <div className="mb-4 text-brand-blue">
                 <Lightbulb size={32} className="text-brand-orange" />
               </div>
-              <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{benefits[0].title}</h4>
-              <p className="text-gray-600 dark:text-gray-300">{benefits[0].description}</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                {benefits[0].title}
+              </h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                {benefits[0].description}
+              </p>
             </div>
           </BlurFade>
 
           {/* Next two cards - single column each */}
           {benefits.slice(1, 3).map((benefit, index) => (
-            <BlurFade key={`benefit-${index + 1}`} delay={0.1 + (index + 1) * 0.1} inView>
+            <BlurFade
+              key={`benefit-${index + 1}`}
+              delay={0.1 + (index + 1) * 0.1}
+              inView
+            >
               <div className="bento-card bg-white dark:bg-gray-800 p-6 shadow-lg h-full">
                 <div className="mb-4 text-brand-blue">
-                  {React.createElement(benefit.icon, { size: 32, className: "text-brand-orange" })}
+                  {React.createElement(benefit.icon, {
+                    size: 32,
+                    className: "text-brand-orange",
+                  })}
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{benefit.title}</h4>
-                <p className="text-gray-600 dark:text-gray-300">{benefit.description}</p>
+                <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                  {benefit.title}
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {benefit.description}
+                </p>
               </div>
             </BlurFade>
           ))}
@@ -96,27 +124,42 @@ const Benefits = () => {
               <div className="mb-4 text-brand-blue">
                 <Sparkles size={32} className="text-brand-orange" />
               </div>
-              <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{benefits[3].title}</h4>
-              <p className="text-gray-600 dark:text-gray-300">{benefits[3].description}</p>
+              <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                {benefits[3].title}
+              </h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                {benefits[3].description}
+              </p>
             </div>
           </BlurFade>
 
           {/* Remaining cards - single column each */}
           {benefits.slice(4).map((benefit, index) => (
-            <BlurFade key={`benefit-${index + 4}`} delay={0.5 + index * 0.1} inView>
+            <BlurFade
+              key={`benefit-${index + 4}`}
+              delay={0.5 + index * 0.1}
+              inView
+            >
               <div className="bento-card bg-white dark:bg-gray-800 p-6 shadow-lg h-full">
                 <div className="mb-4 text-brand-blue">
-                  {React.createElement(benefit.icon, { size: 32, className: "text-brand-orange" })}
+                  {React.createElement(benefit.icon, {
+                    size: 32,
+                    className: "text-brand-orange",
+                  })}
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{benefit.title}</h4>
-                <p className="text-gray-600 dark:text-gray-300">{benefit.description}</p>
+                <h4 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                  {benefit.title}
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {benefit.description}
+                </p>
               </div>
             </BlurFade>
           ))}
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Benefits
+export default Benefits;

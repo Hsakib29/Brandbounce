@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Mail } from "lucide-react"
+import { motion } from "framer-motion";
+import { Mail } from "lucide-react";
 
 const CallToAction = () => {
   return (
@@ -11,10 +11,12 @@ const CallToAction = () => {
           <p className="text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
             your design, elevated instantly
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#0a2540] dark:text-white">Ready when you are</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#0a2540] dark:text-white">
+            Ready when you are
+          </h2>
           <p className="text-gray-600 dark:text-gray-300 text-lg mb-10">
-            We already think it's a match. Go ahead and schedule our first date. We want to chat about your idea and
-            learn your middle name.
+            We already think it's a match. Go ahead and schedule our first date.
+            We want to chat about your idea and learn your middle name.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -40,7 +42,7 @@ const CallToAction = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default CallToAction
+export default CallToAction;

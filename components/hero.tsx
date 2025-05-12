@@ -1,20 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import HoverFadeImages from "./HoverFadeImages"
-import { cn } from "@/lib/utils"
-import { ChevronRight } from "lucide-react"
-import { BlurFade } from "./blur-fade"
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import HoverFadeImages from "./HoverFadeImages";
+import { cn } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
+import { BlurFade } from "./blur-fade";
+import { AuroraBackground } from "./ui/aurora-background";
 
 const Hero = () => {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section className="pt-28 pb-16 md:pt-32 md:pb-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4">
+    <section className="pt-28 pb-16 md:pt-32 md:pb-20 bg-white dark:bg-gray-900 relative">
+      <AuroraBackground className="absolute top-0 left-0 w-full h-full z-0 opacity-70" />
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Mobile-only image above the text */}
+        <div className="block md:hidden relative z-20 mb-8">
+          <HoverFadeImages
+            imageA="/images/hoverimage1.png"
+            imageB="/images/hoverimage2.png"
+          />
+        </div>
+
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0">
             <BlurFade delay={0.1} inView>
@@ -24,7 +35,8 @@ const Hero = () => {
                     "absolute inset-0 block h-full w-full animate-gradient rounded-[inherit] bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:300%_100%] p-[1px]",
                   )}
                   style={{
-                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMask:
+                      "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                     WebkitMaskComposite: "destination-out",
                     mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                     maskComposite: "subtract",
@@ -35,10 +47,7 @@ const Hero = () => {
                 <span className="text-sm font-medium bg-gradient-to-r from-brand-blue to-brand-orange bg-clip-text text-transparent animate-gradient bg-[length:300%_100%]">
                   100% Focused on Your Brand's Success
                 </span>
-                <ChevronRight
-                  className="ml-1 size-4 stroke-neutral-500 transition-transform
-duration-300 ease-in-out group-hover:translate-x-0.5"
-                />
+                <ChevronRight className="ml-1 size-4 stroke-neutral-500 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
               </div>
             </BlurFade>
 
@@ -51,8 +60,10 @@ duration-300 ease-in-out group-hover:translate-x-0.5"
 
             <BlurFade delay={0.3} inView>
               <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg">
-                Empowering small businesses with strategic branding, bespoke logos, and impactful video editing. Elevate
-                your brand's identity and connect with your audience through thoughtful, creative design.
+                Empowering small businesses with strategic branding, bespoke
+                logos, and impactful video editing. Elevate your brand's
+                identity and connect with your audience through thoughtful,
+                creative design.
               </p>
             </BlurFade>
 
@@ -81,12 +92,13 @@ duration-300 ease-in-out group-hover:translate-x-0.5"
             </BlurFade>
           </div>
 
-          <div className="md:w-1/2">
+          {/* Desktop-only image beside text */}
+          <div className="hidden md:block md:w-1/2">
             <BlurFade delay={0.5} inView>
               <div className="relative h-[400px] w-full">
                 <HoverFadeImages
-                  imageA="/images/hoverimage1.png"
-                  imageB="/images/hoverimage2.png"
+                  imageA="/images/hoverimage1.webp"
+                  imageB="/images/hoverimage2.webp"
                 />
               </div>
             </BlurFade>
@@ -101,28 +113,33 @@ duration-300 ease-in-out group-hover:translate-x-0.5"
           </BlurFade>
 
           <BlurFade delay={0.7} inView>
-            <div className="logo-ticker-container">
-              <div className="flex logo-ticker space-x-8">
-                {[1, 2, 3, 4, 5, 6].map((item) => (
-                  <div
-                    key={item}
-                    className="flex-shrink-0 w-32 h-32 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center"
-                  >
-                    <Image
-                      src={`/placeholder.svg?height=80&width=80`}
-                      alt={`Client logo ${item}`}
-                      width={80}
-                      height={80}
-                    />
-                  </div>
-                ))}
+            <div className="logo-ticker-wrapper w-full overflow-hidden">
+              <div className="logo-ticker-container w-screen">
+                <div className="flex items-center logo-ticker space-x-8 py-4 animate-ticker">
+                  {[...Array(50)].flatMap((_, repeatIndex) =>
+                    [...Array(8)].map((_, index) => (
+                      <div
+                        key={`${repeatIndex}-${index}`}
+                        className="flex-shrink-0 flex items-center justify-center"
+                      >
+                        <Image
+                          src={`/images/logo${index + 1}.webp`}
+                          alt={`Client logo ${index + 1}`}
+                          width={80}
+                          height={80}
+                          className="h-auto max-h-20 w-auto object-contain"
+                        />
+                      </div>
+                    )),
+                  )}
+                </div>
               </div>
             </div>
           </BlurFade>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

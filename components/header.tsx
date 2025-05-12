@@ -1,33 +1,36 @@
-"use client"
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
-import { ThemeToggle } from "./theme-toggle"
-import { useModal } from '@/components/ModalContext' // Changed import
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "./theme-toggle";
+import { useModal } from "@/components/ModalContext"; // Changed import
+import Image from "next/image";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { openModal } = useModal() // Get openModal from context
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { openModal } = useModal(); // Get openModal from context
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
-        setIsScrolled(true)
+        setIsScrolled(true);
       } else {
-        setIsScrolled(false)
+        setIsScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
+        isScrolled
+          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md py-2"
+          : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -38,17 +41,15 @@ const Header = () => {
             transition={{ type: "spring", stiffness: 120, delay: 0.1 }}
             className="mr-2"
           >
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="20" fill="url(#paint0_linear)" />
-              <path d="M12 28L20 12L28 28H12Z" stroke="white" strokeWidth="2" />
-              <defs>
-                <linearGradient id="paint0_linear" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#1E90FF" />
-                  <stop offset="1" stopColor="#FF6200" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <img
+              src="/bbicon.gif"
+              alt="Brand Logo"
+              width={60}
+              height={60}
+              className="rounded-full"
+            />
           </motion.div>
+
           <div className="text-xl font-bold">
             <span className="text-brand-blue font-bold">Brand</span>
             <span className="text-brand-orange font-medium">Bounce</span>
@@ -57,16 +58,28 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link href="#services" className="text-gray-800 dark:text-gray-200 nav-link transition-colors">
+          <Link
+            href="#services"
+            className="text-gray-800 dark:text-gray-200 nav-link transition-colors"
+          >
             Services
           </Link>
-          <Link href="#work" className="text-gray-800 dark:text-gray-200 nav-link transition-colors">
+          <Link
+            href="#work"
+            className="text-gray-800 dark:text-gray-200 nav-link transition-colors"
+          >
             Our Works
           </Link>
-          <Link href="#about" className="text-gray-800 dark:text-gray-200 nav-link transition-colors">
+          <Link
+            href="#about"
+            className="text-gray-800 dark:text-gray-200 nav-link transition-colors"
+          >
             Who we are
           </Link>
-          <Link href="#pricing" className="text-gray-800 dark:text-gray-200 nav-link transition-colors">
+          <Link
+            href="#pricing"
+            className="text-gray-800 dark:text-gray-200 nav-link transition-colors"
+          >
             Pricing
           </Link>
           <ThemeToggle />
@@ -83,7 +96,10 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-4">
           <ThemeToggle />
-          <button className="text-gray-800 dark:text-gray-200" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button
+            className="text-gray-800 dark:text-gray-200"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -141,7 +157,7 @@ const Header = () => {
         </motion.div>
       )}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

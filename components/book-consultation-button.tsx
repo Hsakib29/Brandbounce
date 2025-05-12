@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Calendar, X } from "lucide-react"
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Calendar, X } from "lucide-react";
 
 const BookConsultationButton = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     // Show the button after 3 seconds
     const timer = setTimeout(() => {
-      setIsVisible(true)
-    }, 3000)
+      setIsVisible(true);
+    }, 3000);
 
-    return () => clearTimeout(timer)
-  }, [])
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -44,7 +44,10 @@ const BookConsultationButton = () => {
                 mass: 0.8,
               }}
             >
-              <button onClick={() => setIsOpen(true)} className="h-12 flex items-center justify-center">
+              <button
+                onClick={() => setIsOpen(true)}
+                className="h-12 flex items-center justify-center"
+              >
                 <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
                   <Calendar className="w-5 h-5" />
                 </div>
@@ -88,54 +91,81 @@ const BookConsultationButton = () => {
                 <X className="w-5 h-5" />
               </button>
 
-              <h3 className="text-2xl font-bold mb-4 text-[#0a2540] dark:text-white">Book Your Free Consultation</h3>
+              <h3 className="text-2xl font-bold mb-4 text-[#0a2540] dark:text-white">
+                Book Your Free Consultation
+              </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Ready to bounce some ideas around? Schedule a free 30-minute consultation with our team to discuss your
-                project.
+                Ready to bounce some ideas around? Schedule a free 30-minute
+                consultation with our team to discuss your project.
               </p>
 
-              <form className="space-y-4">
+              {/* Form */}
+              <form
+                action="https://formspree.io/f/myzwprwd" // Replace with your Formspree endpoint
+                method="POST"
+                className="space-y-4"
+              >
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Your Name
                   </label>
                   <input
                     type="text"
                     id="name"
+                    name="name"
+                    required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
                     placeholder="John Doe"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Your Email
                   </label>
                   <input
                     type="email"
                     id="email"
+                    name="email"
+                    required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
                     placeholder="john@example.com"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="date" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label
+                    htmlFor="date"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Preferred Date
                   </label>
                   <input
                     type="date"
                     id="date"
+                    name="date"
+                    required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="time" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label
+                    htmlFor="time"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Preferred Time
                   </label>
                   <select
                     id="time"
+                    name="time"
+                    required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
                   >
                     <option value="">Select a time</option>
@@ -150,12 +180,17 @@ const BookConsultationButton = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     What would you like to discuss?
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={3}
+                    required
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-brand-blue focus:border-brand-blue dark:bg-gray-700 dark:text-white"
                     placeholder="Tell us a bit about your project..."
                   ></textarea>
@@ -173,7 +208,7 @@ const BookConsultationButton = () => {
         )}
       </AnimatePresence>
     </>
-  )
-}
+  );
+};
 
-export default BookConsultationButton
+export default BookConsultationButton;

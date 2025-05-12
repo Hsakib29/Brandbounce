@@ -1,21 +1,23 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { motion } from "framer-motion"
+import { useState } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface HoverFadeImagesProps {
-  imageA: string
-  imageB: string
+  imageA: string;
+  imageB: string;
 }
 
 export function HoverFadeImages({ imageA, imageB }: HoverFadeImagesProps) {
-  const [hovered, setHovered] = useState(false)
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <div className="flex justify-center mt-8"> {/* ✅ Add vertical margin here */}
+    <div className="flex justify-center mt-8">
+      {" "}
+      {/* ✅ Add vertical margin here */}
       <div
-        className="relative w-full max-w-[300px] aspect-square overflow-hidden rounded-lg"
+        className="relative w-full max-w-[400px] aspect-square overflow-hidden rounded-lg"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -48,7 +50,7 @@ export function HoverFadeImages({ imageA, imageB }: HoverFadeImagesProps) {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
 
-export default HoverFadeImages
+export default HoverFadeImages;
