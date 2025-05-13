@@ -2,3 +2,4 @@ VL0.1-11/5/2025-backup
 VL0.2-11/5/2025-Added Vimeo video and aurora-background in hero section.
 VL0.3-11/5/2025-Added project images. -Changes Project Carousel. -Updated hoverfadeimages size to 400px. -Made hoverfadeimages to appear on top of the page for mobile devices. -Made changes to logoticker and added logos.
 VL0.4-12/5/2025-Updated and optimized a lot of code. -Safty fallback backup.
+VL0.5-13/5/2025-Fixed the Book free consultation button.

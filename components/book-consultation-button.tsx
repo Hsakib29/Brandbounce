@@ -7,10 +7,9 @@ import { Calendar, X } from "lucide-react";
 const BookConsultationButton = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    // Show the button after 3 seconds
+    // Show the button after  W seconds
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 3000);
@@ -27,49 +26,30 @@ const BookConsultationButton = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
             transition={{ type: "spring", stiffness: 50, damping: 15 }}
-            className="fixed bottom-6 right-6 z-50"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            className="fixed bottom-24 right-6 z-50"
           >
-            <motion.div
-              className="bg-brand-orange text-white rounded-full shadow-lg flex items-center overflow-hidden"
-              initial={{ width: "48px" }}
-              animate={{
-                width: isHovered ? "auto" : "48px",
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30,
-                mass: 0.8,
-              }}
+            <div
+              className="bg-brand-orange text-white rounded-full shadow-lg flex items-center h-12 relative overflow-hidden transition-all duration-300 hover:bg-orange-400"
+              style={{ position: "relative" }}
             >
+              <div
+                className="absolute inset-0 bg-orange-600 transform -translate-x-full transition-transform duration-300 ease-in-out hover:translate-x-0"
+                style={{ zIndex: 0 }}
+              ></div>
               <button
                 onClick={() => setIsOpen(true)}
-                className="h-12 flex items-center justify-center"
+                className="flex items-center justify-center h-full px-4 relative"
+                style={{ zIndex: 1 }}
+                aria-label="Book a consultation"
               >
-                <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <div className="flex items-center justify-center flex-shrink-0">
                   <Calendar className="w-5 h-5" />
                 </div>
-                <AnimatePresence>
-                  {isHovered && (
-                    <motion.span
-                      initial={{ opacity: 0, width: 0 }}
-                      animate={{ opacity: 1, width: "auto" }}
-                      exit={{ opacity: 0, width: 0 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 30,
-                      }}
-                      className="font-medium whitespace-nowrap pr-4"
-                    >
-                      Let's Bounce Ideas—Book Now!
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                <span className="font-medium whitespace-nowrap pl-2 pr-4">
+                  Let's Bounce Ideas—Book Free!
+                </span>
               </button>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -87,6 +67,7 @@ const BookConsultationButton = () => {
               <button
                 onClick={() => setIsOpen(false)}
                 className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                aria-label="Close consultation form"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -101,7 +82,7 @@ const BookConsultationButton = () => {
 
               {/* Form */}
               <form
-                action="https://formspree.io/f/myzwprwd" // Replace with your Formspree endpoint
+                action="https://formspree.io/f/myzwprwd"
                 method="POST"
                 className="space-y-4"
               >
