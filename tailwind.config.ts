@@ -66,6 +66,19 @@ const config: Config = {
         },
         "brand-blue": "#1E90FF",
         "brand-orange": "#FF6200",
+        // TaskBounce colors
+        "taskbounce": {
+          teal: {
+            DEFAULT: "#26A69A",
+            dark: "#1E8A7E",
+            light: "#B2DFDB",
+          },
+          orange: {
+            DEFAULT: "#FF7043",
+            dark: "#F4511E",
+            light: "#FFCCBC",
+          },
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -99,4 +112,5 @@ const config: Config = {
   },
   plugins: [require("tailwindcss-animate")],
 };
+
 export default config;

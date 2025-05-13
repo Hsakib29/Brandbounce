@@ -38,6 +38,15 @@
   --animation-steps-fraction: calc(100 / var(--carousel-items));
   --slide-change-timing: 3;
   --radius: 0.5rem;
+  /* Add these CSS custom properties for direct use in your components */
+  /* TaskBounce colors for direct CSS usage */
+  --taskbounce-teal: #26A69A;
+  --taskbounce-teal-dark: #1E8A7E;
+  --taskbounce-teal-light: #B2DFDB;
+  
+  --taskbounce-orange: #FF7043;
+  --taskbounce-orange-dark: #F4511E;
+  --taskbounce-orange-light: #FFCCBC;
 }
 
 .dark {
@@ -85,8 +94,8 @@
 
 .glass-effect {
   background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
 }

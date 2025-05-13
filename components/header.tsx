@@ -82,6 +82,13 @@ const Header = () => {
           >
             Pricing
           </Link>
+          <Link
+  href="/taskbounce"
+  className="text-sm font-medium text-brand-orange hover:text-brand-blue transition-colors"
+>
+  TaskBounce <span className="text-xs text-gray-400">(Sub-brand)</span>
+</Link>
+
           <ThemeToggle />
           <motion.button
             whileHover={{ scale: 1.05 }}
