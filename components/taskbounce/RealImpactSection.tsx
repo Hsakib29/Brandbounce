@@ -1,21 +1,36 @@
-"use client";
+"use client"
 
-import Image from "next/image";
+import { FC, useEffect, useRef } from "react"
 
-export default function RealImpactSection() {
+const RealImpactSection: FC = () => {
+  const slidesRef = useRef<HTMLDivElement[]>([])
+
+  useEffect(() => {
+    const slides = slidesRef.current;
+    let currentSlide = 0;
+
+    // Set initial slide to visible
+    slides[currentSlide].style.opacity = "1";
+
+    const changeSlide = () => {
+      slides.forEach((slide) => (slide.style.opacity = "0"));
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].style.opacity = "1";
+    };
+
+    const interval = setInterval(changeSlide, 5000); // Change image every 5 seconds
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
   return (
-    <section className="relative w-full h-auto min-h-[600px] bg-slate-900 text-white overflow-hidden">
-      {/* Background image with gradient overlay */}
-      <div className="absolute inset-0 -z-10">
-        <Image
-          src="https://images.pexels.com/photos/3184297/pexels-photo-3184297.jpeg?auto=compress&cs=tinysrgb&w=1470&h=980"
-          alt="Team collaborating on a project"
-          fill
-          className="object-cover opacity-80"
-          quality={80}
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#26A69A]/90 via-[#26A69A]/70 to-transparent" />
+    <section className="relative w-full h-auto min-h-[600px] text-white overflow-hidden bg-dark-slate-gray">
+      {/* Background Slideshow with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <div ref={(el) => el && slidesRef.current.push(el)} className="slide absolute inset-0 bg-[url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40')] bg-cover bg-center opacity-0 transition-opacity duration-1000" style={{ opacity: 0 }}></div>
+        <div ref={(el) => el && slidesRef.current.push(el)} className="slide absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3')] bg-cover bg-center opacity-0 transition-opacity duration-1000" style={{ opacity: 0 }}></div>
+        <div ref={(el) => el && slidesRef.current.push(el)} className="slide absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c')] bg-cover bg-center opacity-0 transition-opacity duration-1000" style={{ opacity: 0 }}></div>
+        {/* Semi-transparent overlay to improve contrast */}
+        <div className="absolute inset-0 bg-black/60 z-10" />
       </div>
 
       {/* Content container */}
@@ -60,3 +75,5 @@ export default function RealImpactSection() {
     </section>
   );
 }
+
+export default RealImpactSection

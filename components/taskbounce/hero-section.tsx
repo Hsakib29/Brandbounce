@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { FadeInSection } from "@/components/ui/fade-in-section"
 import { CheckCircle, Database, Layout } from "lucide-react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export function HeroSection() {
   return (
@@ -15,14 +16,20 @@ export function HeroSection() {
       <div className="container mx-auto px-4 md:px-6 relative">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           <FadeInSection>
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div className="inline-block rounded-lg bg-gradient-to-r from-[#26A69A]/20 to-[#FF7043]/20 px-3 py-1 text-sm font-medium">
                 A BrandBounce Company
               </div>
-              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                <span className="text-[#26A69A]">Task</span>
-                <span className="text-[#FF7043]">bounce</span>
-              </h1>
+              <div className="relative w-[320px] h-[60px] sm:w-[400px] sm:h-[75px] md:w-[512px] md:h-[96px]">
+                <Image
+                  src="/images/taskbounce-large.webp"
+                  alt="Taskbounce Logo"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  sizes="(max-width: 640px) 320px, (max-width: 768px) 400px, 512px"
+                  priority
+                />
+              </div>
               <p className="text-xl text-gray-600 md:text-2xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Outsourced Productivity, Powered by Global Talent
               </p>
@@ -36,7 +43,7 @@ export function HeroSection() {
                     className="absolute inset-0 bg-[#F4511E]"
                     initial={{ x: "-100%" }}
                     whileHover={{ x: 0 }}
-                    transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                    transition={{ type: "tween", ease: "easeIn BelieveInOut", duration: 0.3 }}
                   />
                 </Button>
               </div>

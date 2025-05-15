@@ -6,57 +6,64 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AnimatedLogo } from "@/components/ui/animated-logo"
 import { motion } from "framer-motion"
+import { FC } from "react"
 
-export function TaskbounceNav() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+export const TaskbounceNav: FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
-      <div className="container mx-auto flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
+      <div className="container mx-auto flex h-16 items-center justify-between gap-6">
+        <div className="flex items-center pl-4 sm:pl-0">
           <Link href="/taskbounce" className="flex items-center">
             <AnimatedLogo />
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-6">
+        <nav className="hidden md:flex items-center gap-6">
           <Link
             href="/taskbounce#features"
-            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
           >
             Features
           </Link>
           <Link
             href="/taskbounce#services"
-            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
           >
             Services
           </Link>
           <Link
             href="/taskbounce#about"
-            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
           >
             About
           </Link>
           <Link
             href="/taskbounce#contact"
-            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
           >
             Contact
           </Link>
-          <Link
-            href="/"
-            className="text-sm font-medium text-[#1E90FF] hover:text-[#0066CC] transition-colors flex items-center"
+          <Button
+            asChild
+            className="bg-transparent hover:bg-gray-100 text-sm font-medium transition-all duration-200 rounded-lg px-4 py-2 shadow-sm hover:shadow-md"
           >
-            <motion.span
-              initial={{ x: 0 }}
-              whileHover={{ x: -3 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              ← Back to BrandBounce
-            </motion.span>
-          </Link>
+            <Link href="/">
+              <motion.span
+                initial={{ x: 0 }}
+                whileHover={{ x: -3 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="inline-flex items-center"
+              >
+                <span className="text-[#26A69A] mr-2">Back to</span>
+                <span className="font-[Poppins] font-bold text-[#1E90FF]">Brand</span>
+                <span className="font-[Poppins] font-medium text-[#FF7043]">Bounce</span>
+                <span className="ml-1 text-[#1E90FF]">←</span>
+              </motion.span>
+            </Link>
+          </Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -82,43 +89,54 @@ export function TaskbounceNav() {
           exit={{ opacity: 0, height: 0 }}
           className="md:hidden bg-white border-t"
         >
-          <div className="container mx-auto py-4 flex flex-col space-y-4">
+          <div className="w-full py-4 flex flex-col space-y-4 items-center">
             <Link
               href="/taskbounce#features"
-              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
+              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
               onClick={() => setIsMenuOpen(false)}
             >
               Features
             </Link>
             <Link
               href="/taskbounce#services"
-              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
+              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
               onClick={() => setIsMenuOpen(false)}
             >
               Services
             </Link>
             <Link
               href="/taskbounce#about"
-              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
+              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="/taskbounce#contact"
-              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
+              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
             </Link>
-            <Link
-              href="/"
-              className="text-sm font-medium text-[#1E90FF] hover:text-[#0066CC] transition-colors py-2"
-              onClick={() => setIsMenuOpen(false)}
+            <Button
+              asChild
+              className="bg-transparent hover:bg-gray-100 text-sm font-medium transition-all duration-200 rounded-lg px-4 py-2 shadow-sm hover:shadow-md"
             >
-              ← Back to BrandBounce
-            </Link>
-            <Button className="bg-[#26A69A] hover:bg-[#1E8A7E] text-white w-full">Get Started</Button>
+              <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                <motion.span
+                  initial={{ x: 0 }}
+                  whileHover={{ x: -3 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  className="inline-flex items-center"
+                >
+                  <span className="text-[#26A69A] mr-2">Back to</span>
+                  <span className="font-[Poppins] font-bold text-[#1E90FF]">Brand</span>
+                  <span className="font-[Poppins] font-medium text-[#FF7043]">Bounce</span>
+                  <span className="ml-1 text-[#1E90FF]">←</span>
+                </motion.span>
+              </Link>
+            </Button>
+            <Button className="bg-[#26A69A] hover:bg-[#1E8A7E] text-white w-full max-w-xs">Get Started</Button>
           </div>
         </motion.div>
       )}

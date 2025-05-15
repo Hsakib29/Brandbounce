@@ -5,11 +5,60 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 export function BrandBouncePromo() {
+  // Sparkles animation variants
+  const sparklesVariants = {
+    initial: { 
+      opacity: 0,
+      scale: 0.5,
+      rotate: -45
+    },
+    animate: (i: number) => ({
+      opacity: [0, 1, 0],
+      scale: [0.5, 1.2, 0.8],
+      rotate: [-45, 0, 45],
+      x: [0, (i % 2 === 0 ? -10 : 10), 0],
+      y: [0, (i % 3 === 0 ? -15 : 10), 0],
+      transition: {
+        duration: 2 + Math.random() * 3,
+        delay: i * 0.3,
+        repeat: Infinity,
+        repeatDelay: 5 + Math.random() * 10,
+        ease: "easeInOut"
+      }
+    })
+  };
+
+  // Generate multiple sparkles
+  const generateSparkles = (count: number) => {
+    return Array.from({ length: count }).map((_, i) => (
+      <motion.span
+        key={i}
+        custom={i}
+        variants={sparklesVariants}
+        initial="initial"
+        animate="animate"
+        className="absolute text-[#FF6200]"
+        style={{
+          left: `${10 + (i % 5) * 15}%`,
+          top: `${10 + (i % 3) * 25}%`,
+          fontSize: `${0.5 + Math.random()}rem`
+        }}
+      >
+        <Sparkles className="w-4 h-4" />
+      </motion.span>
+    ));
+  };
+
   return (
     <section className="w-full py-20 bg-gradient-to-br from-[#1E90FF]/5 to-[#FF6200]/5 overflow-hidden relative">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-[#1E90FF]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#FF6200]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+      {/* Floating sparkles in the background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {generateSparkles(12)}
+      </div>
 
       <div className="container mx-auto px-4 md:px-6 relative">
         <div className="max-w-4xl mx-auto text-center mb-16">
@@ -42,12 +91,48 @@ export function BrandBouncePromo() {
                 className="h-12 md:h-16 w-auto"
               />
               <motion.span
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.8, 1, 0.8],
+                  rotate: [0, 10, -10, 0]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut"
+                }}
                 className="absolute -right-4 -top-4 bg-white rounded-full p-1 shadow-md"
               >
                 <Sparkles className="w-5 h-5 text-[#FF6200]" />
               </motion.span>
+              {/* Small sparkles around the logo */}
+              {Array.from({ length: 3 }).map((_, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ 
+                    scale: [0, 1, 0],
+                    opacity: [0, 0.8, 0],
+                    x: i === 0 ? [-10, 0, 10] : i === 1 ? [0, 10, 0] : [10, 0, -10],
+                    y: i === 0 ? [0, -10, 0] : i === 1 ? [-10, 0, 10] : [0, 10, 0]
+                  }}
+                  transition={{ 
+                    duration: 4,
+                    delay: i * 0.5,
+                    repeat: Infinity,
+                    repeatDelay: 5
+                  }}
+                  className="absolute text-[#FF6200]/80"
+                  style={{
+                    left: i === 0 ? '20%' : i === 1 ? '50%' : '80%',
+                    top: i === 0 ? '0%' : i === 1 ? '-20%' : '10%'
+                  }}
+                >
+                  <Sparkles className="w-3 h-3" />
+                </motion.span>
+              ))}
             </span>
           </motion.h2>
           
@@ -122,39 +207,46 @@ export function BrandBouncePromo() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.4 }}
+  viewport={{ once: true }}
+  className="text-center"
+>
+  <Link href="/" passHref legacyBehavior>
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="relative overflow-hidden px-8 py-4 bg-white rounded-full shadow-lg border border-gray-200 group transition-colors duration-300"
+    >
+      <span className="relative z-10 flex items-center justify-center space-x-2">
+        <span className="font-medium text-gray-800 group-hover:text-white transition-colors duration-300">
+          Visit BrandBounce
+        </span>
+        <motion.div
+          animate={{ x: [0, 5, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="text-gray-800 group-hover:text-white transition-colors duration-300"
         >
-          <Link href="https://brandbounce.com" target="_blank">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative overflow-hidden px-8 py-4 bg-white rounded-full shadow-lg border border-gray-200 group"
-            >
-              <span className="relative z-10 flex items-center justify-center space-x-2">
-                <span className="font-medium text-gray-800 group-hover:text-white transition-colors">
-                  Visit BrandBounce
-                </span>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-gray-800 group-hover:text-white transition-colors"
-                >
-                  <ArrowRight className="w-5 h-5" />
-                </motion.div>
-              </span>
-              <motion.span
-                initial={{ scale: 0 }}
-                whileHover={{ scale: 2.5 }}
-                transition={{ duration: 0.5 }}
-                className="absolute inset-0 bg-gradient-to-r from-[#1E90FF] to-[#FF6200] rounded-full opacity-0 group-hover:opacity-100"
-              />
-            </motion.button>
-          </Link>
+          <ArrowRight className="w-5 h-5" />
         </motion.div>
+      </span>
+      <span className="absolute inset-0 bg-gray-800 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Button sparkles */}
+      <motion.span
+        initial={{ scale: 0, opacity: 0 }}
+        whileHover={{ 
+          scale: [1, 1.5, 1],
+          opacity: [0.8, 0],
+          transition: { duration: 1.5 }
+        }}
+        className="absolute -right-2 -top-2 text-[#FF6200]"
+      >
+        <Sparkles className="w-4 h-4" />
+      </motion.span>
+    </motion.button>
+  </Link>
+</motion.div>
       </div>
     </section>
   )
