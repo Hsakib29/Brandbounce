@@ -1,98 +1,79 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import clsx from "clsx";
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
-interface Project {
-  title: string;
-  category: string;
-  image: string;
-  textColor?: string; // Optional: allows per-project text color
-}
+const projects = [
+  {
+    id: 1,
+    name: 'Bunker',
+    type: 'Branding',
+    image:
+      'https://images.unsplash.com/photo-1530651788726-1dbf58eeef1f?auto=format&fit=crop&w=882&q=80',
+  },
+  {
+    id: 2,
+    name: 'Words Remain',
+    type: 'Web Design',
+    image:
+      'https://images.unsplash.com/photo-1559386484-97dfc0e15539?auto=format&fit=crop&w=1234&q=80',
+  },
+  {
+    id: 3,
+    name: 'Falling Out',
+    type: 'UI/UX',
+    image:
+      'https://images.unsplash.com/photo-1533461502717-83546f485d24?auto=format&fit=crop&w=900&q=60',
+  },
+];
 
-interface ProjectCarouselProps {
-  projects: Project[];
-}
+export default function ProjectCarousel() {
+  const [active, setActive] = useState(0);
 
-const ProjectCarousel = ({ projects }: ProjectCarouselProps) => {
-  const [activeItem, setActiveItem] = useState(0);
-
-  const handleItemChange = (index: number) => {
-    setActiveItem(index);
+  const handleClick = (index: number) => {
+    setActive(index);
   };
 
-  // Auto-rotate every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveItem((current) => (current + 1) % projects.length);
-    }, 5000);
+      setActive((prev) => (prev + 1) % projects.length);
+    }, 4000); // Change every 4 seconds
     return () => clearInterval(interval);
-  }, [projects.length]);
+  }, []);
 
-  const getTransformClass = (index: number) => {
-    const diff = (index - activeItem + projects.length) % projects.length;
-
-    if (diff === 0) return "translate-x-0 scale-100 opacity-100 z-20";
-    if (diff === 1 || diff === -projects.length + 1)
-      return "translate-x-[40%] scale-90 opacity-40 z-10";
-    if (diff === projects.length - 1)
-      return "-translate-x-[40%] scale-90 opacity-40 z-10";
-    return "hidden";
+  const getPositionClass = (index: number) => {
+    if (index === active) return 'z-10 scale-100 opacity-100';
+    if (index === (active + 1) % projects.length)
+      return 'translate-x-[40%] scale-90 opacity-50 z-0';
+    if (index === (active + projects.length - 1) % projects.length)
+      return '-translate-x-[40%] scale-90 opacity-50 z-0';
+    return 'hidden';
   };
 
   return (
-    <div className="project-carousel-container w-full h-[400px] flex items-center justify-center relative overflow-hidden">
-      {projects.map((project, index) => (
-        <label
-          key={index}
-          className={clsx(
-            "project-carousel-card absolute transition-all duration-500 ease-in-out w-[60%] h-full cursor-pointer",
-            getTransformClass(index),
-          )}
-          htmlFor={`item-${index + 1}`}
-        >
-          <div className="relative w-full h-full rounded-xl overflow-hidden shadow-lg">
+    <div className="w-full max-w-[800px] h-[600px] flex flex-col items-center justify-center">
+      <div className="relative w-full h-[80%] mb-6">
+        {projects.map((project, index) => (
+          <div
+            key={project.id}
+            onClick={() => handleClick(index)}
+            className={`absolute top-0 left-0 right-0 mx-auto w-[60%] h-full transition-all duration-500 ease-in-out transform cursor-pointer ${getPositionClass(
+              index
+            )}`}
+          >
             <Image
-              src={project.image || "/placeholder.svg"}
-              alt={project.title}
+              src={project.image}
+              alt={project.name}
               fill
-              className="object-cover rounded-xl"
-              onError={(e) => console.log(`Image load error for ${project.image}`, e)}
+              className="rounded-xl object-cover shadow-md"
             />
           </div>
-        </label>
-      ))}
-
-      {/* Radio inputs to allow manual interaction */}
-      <div className="absolute bottom-4 flex gap-2 z-30">
-        {projects.map((_, index) => (
-          <input
-            key={index}
-            type="radio"
-            name="slider"
-            id={`item-${index + 1}`}
-            checked={activeItem === index}
-            onChange={() => handleItemChange(index)}
-            className="hidden"
-          />
         ))}
       </div>
-
-      {/* Info section */}
-      <div
-        className="absolute bottom-16 text-center z-30 w-full"
-        style={{ color: projects[activeItem]?.textColor || "#fff" }}
-      >
-        <div className="text-xl font-semibold">
-          {projects[activeItem]?.title}
-        </div>
-        <div className="text-sm opacity-80">
-          {projects[activeItem]?.category}
-        </div>
+      <div className="bg-white rounded-lg px-4 py-3 shadow-md w-full max-w-xs text-center">
+        <h2 className="text-xl font-semibold text-gray-800">{projects[active].name}</h2>
+        <p className="text-sm text-gray-500">{projects[active].type}</p>
       </div>
     </div>
   );
-};
-
-export default ProjectCarousel;
+}

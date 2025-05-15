@@ -36,11 +36,11 @@ const Header = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="flex items-center">
           <motion.div
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 120, delay: 0.1 }}
-            className="mr-2"
-          >
+    initial={{ y: -100, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ type: "spring", stiffness: 120, delay: 0.1 }}
+    className="mr-0"// reduced from mr-2 to mr-1 or remove completely
+  >
             <Image
               src="/bbicon.gif"
               alt="Brand Logo"
@@ -82,12 +82,29 @@ const Header = () => {
           >
             Pricing
           </Link>
-          <Link
-  href="/taskbounce"
-  className="text-sm font-medium text-brand-orange hover:text-brand-blue transition-colors"
+          <motion.div
+  initial={{ scale: 1 }}
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.96 }}
+  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+  className="relative group"
 >
-  TaskBounce <span className="text-xs text-gray-400">(Sub-brand)</span>
-</Link>
+  <Link
+    href="/taskbounce"
+    className="flex items-center"
+  >
+    <Image
+      src="/images/taskbounce-logo.webp" // Replace with actual logo path
+      alt="TaskBounce Logo"
+      width={100}
+      height={100}
+      className="object-contain"
+    />
+    <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+      Sub-brand of BrandBounce
+    </span>
+  </Link>
+</motion.div>
 
           <ThemeToggle />
           <motion.button

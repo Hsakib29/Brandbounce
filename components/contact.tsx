@@ -132,7 +132,7 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-100 dark:bg-gray-700/20 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
                           placeholder="John Doe"
                         />
                       </div>
@@ -151,7 +151,7 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-100 dark:bg-gray-700/20 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
                           placeholder="john@example.com"
                         />
                       </div>
@@ -169,7 +169,7 @@ const Contact = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-100 dark:bg-gray-700/20 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
                           placeholder="+44 123 456 7890"
                         />
                         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -191,7 +191,7 @@ const Contact = () => {
                           onChange={handleChange}
                           required
                           rows={5}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800/50 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-100 dark:bg-gray-700/20 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent text-white"
                           placeholder="Tell us about your project..."
                         ></textarea>
                       </div>

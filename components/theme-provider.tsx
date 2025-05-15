@@ -1,8 +1,8 @@
 "use client";
 
 import type React from "react";
-
 import { createContext, useContext, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 type Theme = "light" | "dark" | "system";
 
@@ -30,11 +30,11 @@ export function ThemeProvider({
   storageKey = "brandbounce-theme",
   ...props
 }: ThemeProviderProps) {
+  const pathname = usePathname();
   const [theme, setTheme] = useState<Theme>(defaultTheme);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem(storageKey);
-
     if (savedTheme && ["light", "dark", "system"].includes(savedTheme)) {
       setTheme(savedTheme as Theme);
     }
@@ -43,11 +43,17 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
 
+    // Force light mode on /taskbounce page to prevent dark mode issues
+    if (pathname === "/taskbounce") {
+      root.classList.remove("dark");
+      root.classList.add("light");
+      return;
+    }
+
     root.classList.remove("light", "dark");
 
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
       root.classList.add(systemTheme);
@@ -55,7 +61,7 @@ export function ThemeProvider({
     }
 
     root.classList.add(theme);
-  }, [theme]);
+  }, [theme, pathname]);
 
   const value = {
     theme,

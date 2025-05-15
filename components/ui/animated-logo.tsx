@@ -4,12 +4,18 @@ import { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 
-export function AnimatedLogo() {
+interface AnimatedLogoProps {
+  width?: number
+  height?: number
+  className?: string
+}
+
+export function AnimatedLogo({ width = 180, height = 50, className = "" }: AnimatedLogoProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
     <div
-      className="relative cursor-pointer"
+      className={`relative cursor-pointer ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -25,10 +31,10 @@ export function AnimatedLogo() {
         }}
       >
         <Image
-          src="/images/taskbounce-logo.png"
+          src="/images/taskbounce-logo.webp"
           alt="TaskBounce Logo"
-          width={180}
-          height={50}
+          width={width}
+          height={height}
           className="h-auto"
           priority
         />

@@ -12,5 +12,5 @@ export default function TaskbounceLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <TaskbounceLayoutClient children={children} />
+  return <TaskbounceLayoutClient>{children}</TaskbounceLayoutClient>
 }

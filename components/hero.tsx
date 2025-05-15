@@ -112,27 +112,34 @@ const Hero = () => {
 
           <BlurFade delay={0.7} inView>
             <div className="logo-ticker-wrapper w-full overflow-hidden">
-              <div className="logo-ticker-container w-screen">
-                <div className="flex items-center logo-ticker space-x-8 py-4 animate-ticker">
-                  {[...Array(3)].flatMap((_, repeatIndex) =>
-                    [...Array(8)].map((_, index) => (
-                      <div
-                        key={`${repeatIndex}-${index}`}
-                        className="flex-shrink-0 flex items-center justify-center"
-                      >
-                        <Image
-                          src={`/images/logo${index + 1}.webp`}
-                          alt={`Client logo ${index + 1}`}
-                          width={80}
-                          height={80}
-                          className="h-auto max-h-20 w-auto object-contain"
-                        />
-                      </div>
-                    )),
-                  )}
-                </div>
-              </div>
-            </div>
+  <div className="logo-ticker-container w-screen">
+    <div className="flex items-center logo-ticker space-x-8 py-4 animate-ticker">
+      {[...Array(3)].flatMap((_, repeatIndex) =>
+        [...Array(8)].map((_, index) => (
+          <div
+            key={`${repeatIndex}-${index}`}
+            className="flex-shrink-0 flex items-center justify-center"
+          >
+            <Image
+              src={`/images/logo${index + 1}.webp`}
+              alt={`Client logo ${index + 1}`}
+              width={80}
+              height={80}
+              className="h-auto max-h-20 w-auto object-contain dark:hidden"
+            />
+            <Image
+              src={`/images/logo${index + 1}-white.webp`}
+              alt={`Client logo ${index + 1}`}
+              width={80}
+              height={80}
+              className="h-auto max-h-20 w-auto object-contain hidden dark:block"
+            />
+          </div>
+        )),
+      )}
+    </div>
+  </div>
+</div>
           </BlurFade>
         </div>
       </div>
