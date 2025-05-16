@@ -1,34 +1,85 @@
-"use client"
-import Link from "next/link"
-import { ArrowRight, Check, Clock, Globe, Shield, Sparkles } from "lucide-react"
-import { motion } from "framer-motion"
-import Image from "next/image"
+"use client";
 
-export function TaskBouncePromo() {
+import { useState } from "react";
+import {
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  Check,
+  Clock,
+  Globe,
+  Shield,
+  Sparkles,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+
+export default function TaskBounceWrapper() {
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <div className="w-full">
+      <div className="text-center mb-6">
+        <button
+          onClick={() => setVisible((prev) => !prev)}
+          className="inline-flex items-center justify-center text-lg font-semibold text-[#26A69A] hover:text-[#FF7043] transition-colors"
+        >
+          {visible
+            ? "Hide TaskBounce Promo"
+            : "Do you need virtual assistant or back-office support?"}
+          {visible ? (
+            <ChevronUp className="ml-2 w-5 h-5" />
+          ) : (
+            <ChevronDown className="ml-2 w-5 h-5" />
+          )}
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {visible && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="overflow-hidden"
+          >
+            <TaskBouncePromo />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function TaskBouncePromo() {
   const features = [
     {
       icon: <Clock className="w-5 h-5 text-[#26A69A]" />,
       title: "24-Hour Onboarding",
       description: "Get started with your dedicated assistant in just one day",
-      image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=600" // Onboarding process
+      image:
+        "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=600",
     },
     {
       icon: <Globe className="w-5 h-5 text-[#FF7043]" />,
       title: "Global Talent, Local Rates",
       description: "Western-standard work at Bangladesh-competitive prices",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600" // Global workspace
+      image:
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600",
     },
     {
       icon: <Shield className="w-5 h-5 text-[#26A69A]" />,
       title: "Quality Guaranteed",
       description: "Backed by BrandBounce's rigorous quality standards",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600" // Quality check
-    }
-  ]
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600",
+    },
+  ];
 
   return (
     <section className="w-full py-20 bg-gradient-to-br from-[#26A69A]/5 to-[#FF7043]/5 overflow-hidden relative">
-      {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-[#26A69A]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#FF7043]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
 
@@ -45,7 +96,7 @@ export function TaskBouncePromo() {
               From BrandBounce
             </span>
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +114,7 @@ export function TaskBouncePromo() {
               <Sparkles className="w-5 h-5 text-[#FF7043]" />
             </motion.span>
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -71,8 +122,9 @@ export function TaskBouncePromo() {
             viewport={{ once: true }}
             className="text-[#37474F] text-lg md:text-xl mb-8 max-w-3xl mx-auto"
           >
-            Affordable, high-quality virtual assistance and back-office support for startups, creatives, and SMEs. 
-            Get Western-standard productivity at Bangladesh-competitive rates.
+            Affordable, high-quality virtual assistance and back-office support
+            for startups, creatives, and SMEs. Get Western-standard productivity
+            at Bangladesh-competitive rates.
           </motion.p>
         </div>
 
@@ -96,13 +148,23 @@ export function TaskBouncePromo() {
                 />
               </div>
               <div className="p-6">
-                <div className={`w-14 h-14 ${index % 2 === 0 ? 'bg-[#26A69A]/10' : 'bg-[#FF7043]/10'} rounded-2xl flex items-center justify-center mb-4 -mt-12 relative z-10 bg-white border border-gray-100`}>
+                <div
+                  className={`w-14 h-14 ${
+                    index % 2 === 0 ? "bg-[#26A69A]/10" : "bg-[#FF7043]/10"
+                  } rounded-2xl flex items-center justify-center mb-4 -mt-12 relative z-10 bg-white border border-gray-100`}
+                >
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-[#37474F]">{feature.title}</h3>
+                <h3 className="text-xl font-semibold mb-3 text-[#37474F]">
+                  {feature.title}
+                </h3>
                 <p className="text-[#37474F]/80 mb-4">{feature.description}</p>
                 <div className="flex justify-end">
-                  <div className={`w-8 h-8 rounded-full ${index % 2 === 0 ? 'bg-[#26A69A]/10' : 'bg-[#FF7043]/10'} flex items-center justify-center`}>
+                  <div
+                    className={`w-8 h-8 rounded-full ${
+                      index % 2 === 0 ? "bg-[#26A69A]/10" : "bg-[#FF7043]/10"
+                    } flex items-center justify-center`}
+                  >
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
@@ -123,13 +185,15 @@ export function TaskBouncePromo() {
               />
             </div>
             <div className="md:w-1/2 p-8">
-              <h3 className="text-xl font-semibold mb-6 text-[#37474F]">Why Clients Choose TaskBounce</h3>
+              <h3 className="text-xl font-semibold mb-6 text-[#37474F]">
+                Why Clients Choose TaskBounce
+              </h3>
               <div className="space-y-4">
                 {[
                   "£2.99--£9.99/hour rates (vs. £15--£30 for Western VAs)",
                   "Dedicated account managers (not just freelancers)",
                   "24-hour onboarding (vs. 3--7 day hiring processes)",
-                  "BrandBounce's quality control (vs. variable freelance quality)"
+                  "BrandBounce's quality control (vs. variable freelance quality)",
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -167,7 +231,11 @@ export function TaskBouncePromo() {
                 </span>
                 <motion.div
                   animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   className="text-white"
                 >
                   <ArrowRight className="w-5 h-5" />
@@ -182,5 +250,5 @@ export function TaskBouncePromo() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

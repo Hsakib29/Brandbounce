@@ -13,7 +13,8 @@ import Contact from "@/components/contact";
 import CallToAction from "@/components/call-to-action";
 import Footer from "@/components/footer";
 import BookConsultationButton from "@/components/book-consultation-button";
-import { TaskBouncePromo } from "@/components/TaskBouncePromo";
+import TaskBounceWrapper from "@/components/TaskBounceWrapper";
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -21,7 +22,7 @@ export default function Home() {
       <Hero />
       <Banner /> {/* ✅ Inserted the Banner here */}
       <Services />
-      <TaskBouncePromo />
+      <TaskBounceWrapper />
       <OurWork />
       <About />
       <Benefits />

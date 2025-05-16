@@ -8,7 +8,7 @@ import { ServicesSection } from "@/components/taskbounce/services-section"
 import { BrandBouncePromo } from "@/components/taskbounce/brandbounce-promo"
 import { PricingSection } from "@/components/taskbounce/pricing-section"
 import { AboutSection } from "@/components/taskbounce/about-section"
-import { ContactSection } from "@/components/taskbounce/contact-section"
+import { ContactSection } from "@/components/taskbounce/ContactSection"
 import IndustriesSection from "@/components/taskbounce/IndustriesSection"
 
 export default function TaskbouncePage() {
