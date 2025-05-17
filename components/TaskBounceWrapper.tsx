@@ -1,49 +1,48 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import {
-  ChevronDown,
-  ChevronUp,
   ArrowRight,
   Check,
   Clock,
   Globe,
   Shield,
   Sparkles,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
+} from "lucide-react"; // Ensuring all icons are imported
 
 export default function TaskBounceWrapper() {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div className="w-full">
-      <div className="text-center mb-6">
+      <div className="mb-4">
         <button
-          onClick={() => setVisible((prev) => !prev)}
-          className="inline-flex items-center justify-center text-lg font-semibold text-[#26A69A] hover:text-[#FF7043] transition-colors"
+          onClick={() => setIsVisible((prev) => !prev)}
+          className="w-full bg-gradient-to-r from-indigo-50 to-blue-100 text-indigo-700 py-5 px-6 rounded-md shadow-sm flex items-center justify-center font-semibold transition-colors hover:bg-indigo-100"
         >
-          {visible
-            ? "Hide TaskBounce Promo"
-            : "Do you need virtual assistant or back-office support?"}
-          {visible ? (
-            <ChevronUp className="ml-2 w-5 h-5" />
+          <span className="mr-2 text-lg md:text-xl text-center">
+            Explore Affordable Virtual Assistant & Back-Office Support
+          </span>
+          {!isVisible ? (
+            <ChevronDown className="w-5 h-5" />
           ) : (
-            <ChevronDown className="ml-2 w-5 h-5" />
+            <ChevronUp className="w-5 h-5" />
           )}
         </button>
       </div>
 
       <AnimatePresence>
-        {visible && (
+        {isVisible && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="overflow-hidden"
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden mt-2"
           >
             <TaskBouncePromo />
           </motion.div>

@@ -1,12 +1,28 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { FadeInSection } from "@/components/ui/fade-in-section"
-import { CheckCircle } from "lucide-react"
-import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { FadeInSection } from "@/components/ui/fade-in-section";
+import { CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function PricingSection() {
+  const handleGetStartedClick = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.error("Contact section not found!");
+      // Optionally, you could display an error message to the user
+    }
+  };
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
       <div className="container mx-auto px-4 md:px-6">
@@ -28,21 +44,31 @@ export function PricingSection() {
 
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 lg:gap-12 mt-12">
           <FadeInSection delay={0.1}>
-    <motion.div whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 300 }}>
-      <Card className="border-none shadow-lg h-full relative overflow-visible">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#26A69A]/5 to-transparent"></div>
-        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#FF7043] text-white px-4 py-1 rounded-full text-xs font-medium z-10 shadow-md whitespace-nowrap">
-          Most Popular
-        </div>
-        <CardHeader className="relative pt-12 pb-4">
-          <CardTitle className="text-xl">Hourly Rates</CardTitle>
-          <CardDescription className="text-base">Pay only for what you use</CardDescription>
-        </CardHeader>
-        <CardContent className="relative">
+            <motion.div
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Card className="border-none shadow-lg h-full relative overflow-visible">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#26A69A]/5 to-transparent"></div>
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#FF7043] text-white px-4 py-1 rounded-full text-xs font-medium z-10 shadow-md whitespace-nowrap">
+                  Most Popular
+                </div>
+                <CardHeader className="relative pt-12 pb-4">
+                  <CardTitle className="text-xl">Hourly Rates</CardTitle>
+                  <CardDescription className="text-base">
+                    Pay only for what you use
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="relative">
                   <div className="text-4xl font-bold">
-                    £2.99<span className="text-lg font-normal text-gray-500">/hour</span>
+                    £2.99
+                    <span className="text-lg font-normal text-gray-500">
+                      /hour
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">Basic administrative tasks</p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    Basic administrative tasks
+                  </p>
                   <ul className="mt-4 space-y-2">
                     <li className="flex items-center">
                       <CheckCircle className="mr-2 h-4 w-4 text-[#26A69A]" />
@@ -58,13 +84,20 @@ export function PricingSection() {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <Button className="w-full bg-[#26A69A] hover:bg-[#1E8A7E] relative overflow-hidden group">
+                    <Button
+                      className="w-full bg-[#26A69A] hover:bg-[#1E8A7E] relative overflow-hidden group"
+                      onClick={handleGetStartedClick}
+                    >
                       <span className="relative z-10">Get Started</span>
                       <motion.div
                         className="absolute inset-0 bg-[#1E8A7E]"
                         initial={{ x: "-100%" }}
                         whileHover={{ x: 0 }}
-                        transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                        transition={{
+                          type: "tween",
+                          ease: "easeInOut",
+                          duration: 0.3,
+                        }}
                       />
                     </Button>
                   </div>
@@ -74,18 +107,28 @@ export function PricingSection() {
           </FadeInSection>
 
           <FadeInSection delay={0.2}>
-    <motion.div whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 300 }}>
-      <Card className="border-none shadow-lg h-full relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FF7043]/5 to-transparent"></div>
-        <CardHeader className="relative pt-12 pb-4">
-          <CardTitle className="text-xl">Task Packs</CardTitle>
-          <CardDescription className="text-base">Pre-purchased task bundles</CardDescription>
-        </CardHeader>
-        <CardContent className="relative">
+            <motion.div
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Card className="border-none shadow-lg h-full relative overflow-visible">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#FF7043]/5 to-transparent"></div>
+                <CardHeader className="relative pt-12 pb-4">
+                  <CardTitle className="text-xl">Task Packs</CardTitle>
+                  <CardDescription className="text-base">
+                    Pre-purchased task bundles
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="relative">
                   <div className="text-4xl font-bold">
-                    £29<span className="text-lg font-normal text-gray-500">/pack</span>
+                    £29
+                    <span className="text-lg font-normal text-gray-500">
+                      /pack
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">500 data entries or equivalent</p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    500 data entries or equivalent
+                  </p>
                   <ul className="mt-4 space-y-2">
                     <li className="flex items-center">
                       <CheckCircle className="mr-2 h-4 w-4 text-[#FF7043]" />
@@ -101,13 +144,20 @@ export function PricingSection() {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <Button className="w-full bg-[#FF7043] hover:bg-[#F4511E] relative overflow-hidden group">
+                    <Button
+                      className="w-full bg-[#FF7043] hover:bg-[#F4511E] relative overflow-hidden group"
+                      onClick={handleGetStartedClick}
+                    >
                       <span className="relative z-10">Get Started</span>
                       <motion.div
                         className="absolute inset-0 bg-[#F4511E]"
                         initial={{ x: "-100%" }}
                         whileHover={{ x: 0 }}
-                        transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                        transition={{
+                          type: "tween",
+                          ease: "easeInOut",
+                          duration: 0.3,
+                        }}
                       />
                     </Button>
                   </div>
@@ -117,18 +167,28 @@ export function PricingSection() {
           </FadeInSection>
 
           <FadeInSection delay={0.3}>
-    <motion.div whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 300 }}>
-      <Card className="border-none shadow-lg h-full relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#26A69A]/5 to-transparent"></div>
-        <CardHeader className="relative pt-12 pb-4">
-          <CardTitle className="text-xl">Retainers</CardTitle>
-          <CardDescription className="text-base">Monthly dedicated support</CardDescription>
-        </CardHeader>
-        <CardContent className="relative">
+            <motion.div
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Card className="border-none shadow-lg h-full relative overflow-visible">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#26A69A]/5 to-transparent"></div>
+                <CardHeader className="relative pt-12 pb-4">
+                  <CardTitle className="text-xl">Retainers</CardTitle>
+                  <CardDescription className="text-base">
+                    Monthly dedicated support
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="relative">
                   <div className="text-4xl font-bold">
-                    £99<span className="text-lg font-normal text-gray-500">/month</span>
+                    £99
+                    <span className="text-lg font-normal text-gray-500">
+                      /month
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">20 hours of support</p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    20 hours of support
+                  </p>
                   <ul className="mt-4 space-y-2">
                     <li className="flex items-center">
                       <CheckCircle className="mr-2 h-4 w-4 text-[#26A69A]" />
@@ -144,13 +204,20 @@ export function PricingSection() {
                     </li>
                   </ul>
                   <div className="mt-6">
-                    <Button className="w-full bg-[#26A69A] hover:bg-[#1E8A7E] relative overflow-hidden group">
+                    <Button
+                      className="w-full bg-[#26A69A] hover:bg-[#1E8A7E] relative overflow-hidden group"
+                      onClick={handleGetStartedClick}
+                    >
                       <span className="relative z-10">Get Started</span>
                       <motion.div
                         className="absolute inset-0 bg-[#1E8A7E]"
                         initial={{ x: "-100%" }}
                         whileHover={{ x: 0 }}
-                        transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                        transition={{
+                          type: "tween",
+                          ease: "easeInOut",
+                          duration: 0.3,
+                        }}
                       />
                     </Button>
                   </div>
@@ -161,5 +228,5 @@ export function PricingSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

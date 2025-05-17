@@ -1,15 +1,27 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { AnimatedLogo } from "@/components/ui/animated-logo"
-import { motion } from "framer-motion"
-import { FC } from "react"
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { AnimatedLogo } from "@/components/ui/animated-logo";
+import { motion } from "framer-motion";
+import { FC } from "react";
 
 export const TaskbounceNav: FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const handleGetStartedClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.error("Contact section not found!");
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
@@ -58,8 +70,12 @@ export const TaskbounceNav: FC = () => {
                 className="inline-flex items-center"
               >
                 <span className="text-[#26A69A] mr-2">Back to</span>
-                <span className="font-[Poppins] font-bold text-[#1E90FF]">Brand</span>
-                <span className="font-[Poppins] font-medium text-[#FF7043]">Bounce</span>
+                <span className="font-[Poppins] font-bold text-[#1E90FF]">
+                  Brand
+                </span>
+                <span className="font-[Poppins] font-medium text-[#FF7043]">
+                  Bounce
+                </span>
                 <span className="ml-1 text-[#1E90FF]">←</span>
               </motion.span>
             </Link>
@@ -77,7 +93,12 @@ export const TaskbounceNav: FC = () => {
         </div>
 
         <div className="hidden md:block">
-          <Button className="bg-[#26A69A] hover:bg-[#1E8A7E] text-white">Get Started</Button>
+          <Button
+            className="bg-[#26A69A] hover:bg-[#1E8A7E] text-white"
+            onClick={handleGetStartedClick}
+          >
+            Get Started
+          </Button>
         </div>
       </div>
 
@@ -130,16 +151,25 @@ export const TaskbounceNav: FC = () => {
                   className="inline-flex items-center"
                 >
                   <span className="text-[#26A69A] mr-2">Back to</span>
-                  <span className="font-[Poppins] font-bold text-[#1E90FF]">Brand</span>
-                  <span className="font-[Poppins] font-medium text-[#FF7043]">Bounce</span>
+                  <span className="font-[Poppins] font-bold text-[#1E90FF]">
+                    Brand
+                  </span>
+                  <span className="font-[Poppins] font-medium text-[#FF7043]">
+                    Bounce
+                  </span>
                   <span className="ml-1 text-[#1E90FF]">←</span>
                 </motion.span>
               </Link>
             </Button>
-            <Button className="bg-[#26A69A] hover:bg-[#1E8A7E] text-white w-full max-w-xs">Get Started</Button>
+            <Button
+              className="bg-[#26A69A] hover:bg-[#1E8A7E] text-white w-full max-w-xs"
+              onClick={handleGetStartedClick}
+            >
+              Get Started
+            </Button>
           </div>
         </motion.div>
       )}
     </header>
-  )
-}
+  );
+};

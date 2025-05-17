@@ -1,10 +1,18 @@
-"use client"
+"use client";
 
-import { CheckCircle, Globe, ArrowRight } from "lucide-react"
-import { motion } from "framer-motion"
-import Link from "next/link"
+import { CheckCircle, Globe, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export function FeaturesSection() {
+  const scrollToContact = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Prevent the default link behavior
+    const contactSection = document.getElementById("contact"); // Assuming your contact section has the ID "contact"
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-white relative overflow-hidden">
       {/* Background elements */}
@@ -21,15 +29,16 @@ export function FeaturesSection() {
             Delegate with Confidence
           </h2>
           <p className="max-w-[900px] text-gray-500 md:text-xl lg:text-base xl:text-xl">
-            Our unique approach combines global talent with local quality standards.
+            Our unique approach combines global talent with local quality
+            standards.
           </p>
         </div>
 
         {/* Features grid */}
         <div className="grid max-w-5xl grid-cols-1 gap-6 mx-auto md:grid-cols-3 lg:gap-12">
           {/* Feature 1 */}
-          <motion.div 
-            whileHover={{ y: -10 }} 
+          <motion.div
+            whileHover={{ y: -10 }}
             transition={{ type: "spring", stiffness: 300 }}
             className="h-full"
           >
@@ -41,14 +50,15 @@ export function FeaturesSection() {
                 Built on BrandBounce Trust
               </h3>
               <p className="mt-auto text-gray-600">
-                Backed by BrandBounce, we deliver reliable, high-quality support you can count on.
+                Backed by BrandBounce, we deliver reliable, high-quality support
+                you can count on.
               </p>
             </div>
           </motion.div>
 
           {/* Feature 2 */}
-          <motion.div 
-            whileHover={{ y: -10 }} 
+          <motion.div
+            whileHover={{ y: -10 }}
             transition={{ type: "spring", stiffness: 300 }}
             className="h-full"
           >
@@ -60,14 +70,15 @@ export function FeaturesSection() {
                 Global Talent, Local Value
               </h3>
               <p className="mt-auto text-gray-600">
-                Dhaka-based experts deliver Western-quality work from £2.99–£9.99/hour.
+                Dhaka-based experts deliver Western-quality work from
+                £2.99–£9.99/hour.
               </p>
             </div>
           </motion.div>
 
           {/* Feature 3 */}
-          <motion.div 
-            whileHover={{ y: -10 }} 
+          <motion.div
+            whileHover={{ y: -10 }}
             transition={{ type: "spring", stiffness: 300 }}
             className="h-full"
           >
@@ -87,13 +98,14 @@ export function FeaturesSection() {
 
         {/* CTA button */}
         <div className="mt-12 text-center">
-          <Link href="/start">
-            <button className="px-6 py-3 text-lg font-medium text-white transition-colors rounded-lg bg-[#FF7043] hover:bg-[#FF7043]/90">
-              Ready to Delegate? Start Now
-            </button>
-          </Link>
+          <button
+            onClick={scrollToContact}
+            className="px-6 py-3 text-lg font-medium text-white transition-colors rounded-lg bg-[#FF7043] hover:bg-[#FF7043]/90"
+          >
+            Ready to Delegate? Start Now
+          </button>
         </div>
       </div>
     </section>
-  )
+  );
 }
