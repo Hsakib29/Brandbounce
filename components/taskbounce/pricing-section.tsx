@@ -1,16 +1,193 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { FadeInSection } from "@/components/ui/fade-in-section";
+} from "../ui/card";
+import { FadeInSection } from "../ui/fade-in-section";
+
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+
+const pricingPlans = [
+  {
+    title: "Hourly Rates",
+    description: "Pay only for what you use",
+    price: "£2.99",
+    unit: "/hour",
+    details: "Basic administrative tasks",
+    features: ["Email management", "Data entry", "Calendar management"],
+    colors: {
+      gradientFrom: "#26A69A",
+      gradientTo: "#FF7043",
+      badgeBg: "#FF7043",
+      badgeText: "white",
+      checkIcon: "#26A69A",
+      buttonBg: "#26A69A",
+      buttonHoverBg: "#1E8A7E",
+      motionBg: "#1E8A7E",
+    },
+    badgeText: "Most Popular",
+    delay: 0.1,
+  },
+  {
+    title: "Task Packs",
+    description: "Pre-purchased task bundles",
+    price: "£29",
+    unit: "/pack",
+    details: "500 data entries or equivalent",
+    features: ["Lead list building", "Product uploads", "Research tasks"],
+    colors: {
+      gradientFrom: "#FF7043",
+      gradientTo: "transparent",
+      badgeBg: "#FF7043",
+      badgeText: "white",
+      checkIcon: "#FF7043",
+      buttonBg: "#FF7043",
+      buttonHoverBg: "#F4511E",
+      motionBg: "#F4511E",
+    },
+    badgeText: null,
+    delay: 0.2,
+  },
+  {
+    title: "Retainers",
+    description: "Monthly dedicated support",
+    price: "£99",
+    unit: "/month",
+    details: "20 hours of support",
+    features: ["Dedicated assistant", "Priority support", "All service types"],
+    colors: {
+      gradientFrom: "#26A69A",
+      gradientTo: "transparent",
+      badgeBg: "#26A69A",
+      badgeText: "white",
+      checkIcon: "#26A69A",
+      buttonBg: "#26A69A",
+      buttonHoverBg: "#1E8A7E",
+      motionBg: "#1E8A7E",
+    },
+    badgeText: null,
+    delay: 0.3,
+  },
+];
+
+function PricingCard({
+  title,
+  description,
+  price,
+  unit,
+  details,
+  features,
+  colors,
+  badgeText,
+  delay,
+  onGetStartedClick,
+}: {
+  title: string;
+  description: string;
+  price: string;
+  unit: string;
+  details: string;
+  features: string[];
+  colors: {
+    gradientFrom: string;
+    gradientTo: string;
+    badgeBg: string;
+    badgeText: string;
+    checkIcon: string;
+    buttonBg: string;
+    buttonHoverBg: string;
+    motionBg: string;
+  };
+  badgeText: string | null;
+  delay: number;
+  onGetStartedClick: () => void;
+}) {
+  return (
+    <FadeInSection delay={delay}>
+      <motion.div
+        whileHover={{ y: -10 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        <Card className="border-none shadow-lg h-full relative overflow-visible">
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(to bottom, ${colors.gradientFrom}/5, ${colors.gradientTo})`,
+            }}
+          />
+          {badgeText && (
+            <div
+              className="absolute -top-3 left-1/2 transform -translate-x-1/2 text-white px-4 py-1 rounded-full text-xs font-medium z-10 shadow-md whitespace-nowrap"
+              style={{ backgroundColor: colors.badgeBg }}
+            >
+              {badgeText}
+            </div>
+          )}
+          <CardHeader className="relative pt-12 pb-4">
+            <CardTitle className="text-xl">{title}</CardTitle>
+            <CardDescription className="text-base">
+              {description}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="relative">
+            <div className="text-4xl font-bold">
+              {price}
+              <span className="text-lg font-normal text-gray-500">{unit}</span>
+            </div>
+            <p className="text-sm text-gray-500 mt-2">{details}</p>
+            <ul className="mt-4 space-y-2">
+              {features.map((feature) => (
+                <li key={feature} className="flex items-center">
+                  <CheckCircle
+                    className="mr-2 h-4 w-4"
+                    style={{ color: colors.checkIcon }}
+                  />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6">
+              <Button
+                className="w-full relative overflow-hidden group"
+                style={{ backgroundColor: colors.buttonBg }}
+                onClick={onGetStartedClick}
+                onMouseEnter={(e) => {
+                  (
+                    e.currentTarget.querySelector("div") as HTMLElement
+                  ).style.transform = "translateX(0)";
+                }}
+                onMouseLeave={(e) => {
+                  (
+                    e.currentTarget.querySelector("div") as HTMLElement
+                  ).style.transform = "translateX(-100%)";
+                }}
+              >
+                <span className="relative z-10">Get Started</span>
+                <motion.div
+                  className="absolute inset-0"
+                  style={{ backgroundColor: colors.motionBg }}
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "-100%" }}
+                  transition={{
+                    type: "tween",
+                    ease: "easeInOut",
+                    duration: 0.3,
+                  }}
+                />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </FadeInSection>
+  );
+}
 
 export function PricingSection() {
   const handleGetStartedClick = () => {
@@ -19,7 +196,6 @@ export function PricingSection() {
       contactSection.scrollIntoView({ behavior: "smooth" });
     } else {
       console.error("Contact section not found!");
-      // Optionally, you could display an error message to the user
     }
   };
 
@@ -43,188 +219,21 @@ export function PricingSection() {
         </FadeInSection>
 
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 lg:gap-12 mt-12">
-          <FadeInSection delay={0.1}>
-            <motion.div
-              whileHover={{ y: -10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Card className="border-none shadow-lg h-full relative overflow-visible">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#26A69A]/5 to-transparent"></div>
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#FF7043] text-white px-4 py-1 rounded-full text-xs font-medium z-10 shadow-md whitespace-nowrap">
-                  Most Popular
-                </div>
-                <CardHeader className="relative pt-12 pb-4">
-                  <CardTitle className="text-xl">Hourly Rates</CardTitle>
-                  <CardDescription className="text-base">
-                    Pay only for what you use
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="relative">
-                  <div className="text-4xl font-bold">
-                    £2.99
-                    <span className="text-lg font-normal text-gray-500">
-                      /hour
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-500 mt-2">
-                    Basic administrative tasks
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#26A69A]" />
-                      <span>Email management</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#26A69A]" />
-                      <span>Data entry</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#26A69A]" />
-                      <span>Calendar management</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6">
-                    <Button
-                      className="w-full bg-[#26A69A] hover:bg-[#1E8A7E] relative overflow-hidden group"
-                      onClick={handleGetStartedClick}
-                    >
-                      <span className="relative z-10">Get Started</span>
-                      <motion.div
-                        className="absolute inset-0 bg-[#1E8A7E]"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: 0 }}
-                        transition={{
-                          type: "tween",
-                          ease: "easeInOut",
-                          duration: 0.3,
-                        }}
-                      />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </FadeInSection>
-
-          <FadeInSection delay={0.2}>
-            <motion.div
-              whileHover={{ y: -10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Card className="border-none shadow-lg h-full relative overflow-visible">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#FF7043]/5 to-transparent"></div>
-                <CardHeader className="relative pt-12 pb-4">
-                  <CardTitle className="text-xl">Task Packs</CardTitle>
-                  <CardDescription className="text-base">
-                    Pre-purchased task bundles
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="relative">
-                  <div className="text-4xl font-bold">
-                    £29
-                    <span className="text-lg font-normal text-gray-500">
-                      /pack
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-500 mt-2">
-                    500 data entries or equivalent
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#FF7043]" />
-                      <span>Lead list building</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#FF7043]" />
-                      <span>Product uploads</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#FF7043]" />
-                      <span>Research tasks</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6">
-                    <Button
-                      className="w-full bg-[#FF7043] hover:bg-[#F4511E] relative overflow-hidden group"
-                      onClick={handleGetStartedClick}
-                    >
-                      <span className="relative z-10">Get Started</span>
-                      <motion.div
-                        className="absolute inset-0 bg-[#F4511E]"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: 0 }}
-                        transition={{
-                          type: "tween",
-                          ease: "easeInOut",
-                          duration: 0.3,
-                        }}
-                      />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </FadeInSection>
-
-          <FadeInSection delay={0.3}>
-            <motion.div
-              whileHover={{ y: -10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Card className="border-none shadow-lg h-full relative overflow-visible">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#26A69A]/5 to-transparent"></div>
-                <CardHeader className="relative pt-12 pb-4">
-                  <CardTitle className="text-xl">Retainers</CardTitle>
-                  <CardDescription className="text-base">
-                    Monthly dedicated support
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="relative">
-                  <div className="text-4xl font-bold">
-                    £99
-                    <span className="text-lg font-normal text-gray-500">
-                      /month
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-500 mt-2">
-                    20 hours of support
-                  </p>
-                  <ul className="mt-4 space-y-2">
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#26A69A]" />
-                      <span>Dedicated assistant</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#26A69A]" />
-                      <span>Priority support</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="mr-2 h-4 w-4 text-[#26A69A]" />
-                      <span>All service types</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6">
-                    <Button
-                      className="w-full bg-[#26A69A] hover:bg-[#1E8A7E] relative overflow-hidden group"
-                      onClick={handleGetStartedClick}
-                    >
-                      <span className="relative z-10">Get Started</span>
-                      <motion.div
-                        className="absolute inset-0 bg-[#1E8A7E]"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: 0 }}
-                        transition={{
-                          type: "tween",
-                          ease: "easeInOut",
-                          duration: 0.3,
-                        }}
-                      />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </FadeInSection>
+          {pricingPlans.map((plan) => (
+            <PricingCard
+              key={plan.title}
+              title={plan.title}
+              description={plan.description}
+              price={plan.price}
+              unit={plan.unit}
+              details={plan.details}
+              features={plan.features}
+              colors={plan.colors}
+              badgeText={plan.badgeText}
+              delay={plan.delay}
+              onGetStartedClick={handleGetStartedClick}
+            />
+          ))}
         </div>
       </div>
     </section>
