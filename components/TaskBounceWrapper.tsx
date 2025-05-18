@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import styles from "./TaskBounceWrapper.module.css";
 // import Image from "next/image"; // Removed next/image
 import Link from "next/link";
 import {
@@ -181,14 +182,7 @@ function TaskBouncePromo() {
                 <img // Replaced with standard img tag
                   src={feature.image}
                   alt={feature.title}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
+                  className={styles.coverImage}
                 />
               </div>
               <div className="p-6">
@@ -230,14 +224,7 @@ function TaskBouncePromo() {
               <img // Replaced with standard img tag
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200"
                 alt="Virtual team collaboration"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
+                className={styles.coverImage}
               />
             </div>
             <div className="md:w-1/2 p-8">
