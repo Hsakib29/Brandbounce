@@ -1,72 +1,36 @@
 "use client";
 
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useState } from "react";
+
+const slideImages = [
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
+];
 
 const RealImpactSection: FC = () => {
-  const slidesRef = useRef<{
-    current: HTMLDivElement[];
-    push: (el: HTMLDivElement) => void;
-  }>({
-    current: [],
-    push(el: HTMLDivElement) {
-      if (el) {
-        this.current.push(el);
-      }
-    },
-  });
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    const slides = slidesRef.current.current; // Access the array through .current
-    let currentSlide = 0;
-
-    // Set initial slide to visible
-    if (slides[0]) {
-      slides[0].style.opacity = "1";
-    }
-
-    const changeSlide = () => {
-      slides.forEach((slide) => (slide.style.opacity = "0"));
-      currentSlide = (currentSlide + 1) % slides.length;
-      if (slides[currentSlide]) {
-        slides[currentSlide].style.opacity = "1";
-      }
-    };
-
-    const interval = setInterval(changeSlide, 5000); // Change image every 5 seconds
-    return () => clearInterval(interval); // Cleanup on unmount
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slideImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="relative w-full h-auto min-h-[600px] text-white overflow-hidden bg-dark-slate-gray">
       {/* Background Slideshow with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div
-          ref={(el) => {
-            if (el) {
-              slidesRef.current.push(el);
-            }
-          }}
-          className="slide absolute inset-0 bg-[url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40')] bg-cover bg-center opacity-0 transition-opacity duration-1000"
-          style={{ opacity: 0 }}
-        ></div>
-        <div
-          ref={(el) => {
-            if (el) {
-              slidesRef.current.push(el);
-            }
-          }}
-          className="slide absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3')] bg-cover bg-center opacity-0 transition-opacity duration-1000"
-          style={{ opacity: 0 }}
-        ></div>
-        <div
-          ref={(el) => {
-            if (el) {
-              slidesRef.current.push(el);
-            }
-          }}
-          className="slide absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c')] bg-cover bg-center opacity-0 transition-opacity duration-1000"
-          style={{ opacity: 0 }}
-        ></div>
+        {slideImages.map((url, index) => (
+          <div
+            key={index}
+            className={`slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ backgroundImage: `url('${url}')` }}
+          />
+        ))}
         {/* Semi-transparent overlay to improve contrast */}
         <div className="absolute inset-0 bg-black/60 z-10" />
       </div>
