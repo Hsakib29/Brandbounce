@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
+// import Image from "next/image"; // Removed next/image
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,24 +16,57 @@ import {
 
 export default function TaskBounceWrapper() {
   const [isVisible, setIsVisible] = useState(false);
+  const [showBanner, setShowBanner] = useState(true); // Added state for banner visibility
+
+  const handleBannerClick = () => {
+    setIsVisible((prev) => !prev);
+    setShowBanner(false); // Hide banner on click
+  };
 
   return (
     <div className="w-full">
-      <div className="mb-4">
-        <button
-          onClick={() => setIsVisible((prev) => !prev)}
-          className="w-full bg-gradient-to-r from-indigo-50 to-blue-100 text-indigo-700 py-5 px-6 rounded-md shadow-sm flex items-center justify-center font-semibold transition-colors hover:bg-indigo-100"
-        >
-          <span className="mr-2 text-lg md:text-xl text-center">
-            Explore Affordable Virtual Assistant & Back-Office Support
-          </span>
-          {!isVisible ? (
-            <ChevronDown className="w-5 h-5" />
-          ) : (
-            <ChevronUp className="w-5 h-5" />
-          )}
-        </button>
-      </div>
+      {showBanner && ( // Conditionally render the banner
+        <div className="mb-4">
+          {/* Collapsed State: Banner */}
+          <div
+            className="bg-gradient-to-r from-teal-50 to-blue-50 border border-gray-200 dark:border-gray-800 rounded-xl shadow-md p-4 flex items-center justify-between w-full max-w-5xl mx-auto cursor-pointer"
+            onClick={handleBannerClick} // Use the new handler
+          >
+            <div className="flex items-center gap-6">
+              {/* Virtual Assistant Image */}
+              <img
+                src="https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&w=100&h=100&fit=crop"
+                alt="Virtual Assistant"
+                className="rounded-full"
+                width={100}
+                height={100}
+              />
+              <div className="space-y-2">
+                <div className="text-lg font-semibold text-gray-900 dark:text-white">
+                  🚀 Need a Virtual Assistant?
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">
+                  Boost your productivity with affordable, skilled virtual
+                  assistants.
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  Powered by TaskBounce
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <span className="text-sm text-teal-600 dark:text-teal-400 font-medium mr-2">
+                Learn More
+              </span>
+              {!isVisible ? (
+                <ChevronDown className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+              ) : (
+                <ChevronUp className="w-5 h-5 text-teal-600 dark:text-teal-400" />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <AnimatePresence>
         {isVisible && (
@@ -138,12 +171,24 @@ function TaskBouncePromo() {
               className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1"
             >
               <div className="h-40 relative overflow-hidden">
-                <Image
+                {/* <Image  // Removed Next.js Image
                   src={feature.image}
                   alt={feature.title}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 33vw"
+                /> */}
+                <img // Replaced with standard img tag
+                  src={feature.image}
+                  alt={feature.title}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
                 />
               </div>
               <div className="p-6">
@@ -175,12 +220,24 @@ function TaskBouncePromo() {
         <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden mb-16">
           <div className="md:flex">
             <div className="md:w-1/2 relative h-64 md:h-auto">
-              <Image
+              {/* <Image // Removed Next.js Image
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200"
                 alt="Virtual team collaboration"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+              /> */}
+              <img // Replaced with standard img tag
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200"
+                alt="Virtual team collaboration"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
               />
             </div>
             <div className="md:w-1/2 p-8">
