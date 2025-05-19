@@ -4,48 +4,53 @@ import { BlurFade } from "./blur-fade";
 
 const services = [
   {
-    category: "Brand Identity Design",
+    category: "Logo Design",
     color: "service-category-blue",
-    price: "Starting at £100",
+    price: "£175–£650",
     deliverables: [
-      "Logo concept",
-      "Color palette",
-      "Typography guide",
-      "Revision rounds",
-      "Delivery timeline",
+      "Starter: 2 concepts, 1 revision, PNG/JPEG files",
+      "Core: 4 concepts, 2 revisions, vector & guidelines",
+      "Premium: 6 concepts, 3 revisions, full identity kit",
     ],
   },
   {
-    category: "Visual Content Creation",
+    category: "Branding",
     color: "service-category-orange",
-    price: "Starting at £50",
+    price: "£450–£2250",
     deliverables: [
-      "Design assets",
-      "Revision rounds",
-      "Final digital files",
-      "Delivery timeline",
+      "Brand Strategy: Research, positioning, audience, values",
+      "Visual Identity: Logo, palette, typography, templates",
+      "Full Package: Strategy + Identity (10% off when bundled)",
     ],
   },
   {
-    category: "Video Editing and Motion",
+    category: "Video Editing",
     color: "service-category-navy",
-    price: "Starting at £70",
+    price: "£150–£1000+",
     deliverables: [
-      "Video cuts and transitions",
-      "Revision rounds",
-      "Final video file",
-      "Delivery timeline",
+      "Basic: £50/min, cuts, text overlays, 1 revision",
+      "Standard: £100/min, motion graphics, 2 revisions",
+      "Premium: £200/min, VFX, sound mixing, 3 revisions",
     ],
   },
   {
     category: "Social Media Marketing",
     color: "service-category-gray",
-    price: "Starting at £90",
+    price: "£250–£1350",
     deliverables: [
-      "Social media posts",
-      "Revision rounds",
-      "Campaign schedule",
-      "Ongoing support",
+      "Setup: £250–£600 (3 platforms, content plan)",
+      "Starter: £450/mo, 6 posts, engagement, 1 platform",
+      "Premium: £1350/mo, 18 posts, full ads & reporting",
+    ],
+  },
+  {
+    category: "Graphic Design",
+    color: "service-category-blue",
+    price: "£75–£1200",
+    deliverables: [
+      "Starter: £75–£250 (1 design item, 1 revision)",
+      "Core: £250–£600 (multi-page, infographics)",
+      "Premium: £600–£1200 (bespoke collateral, style guide)",
     ],
   },
 ];
@@ -72,8 +77,8 @@ const Pricing = () => {
             <span className="text-brand-orange">Tailored to Your Budget!</span>
           </h3>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            At BrandBounce, we're all about making your startup or small
-            business pop with bold, memorable designs—without breaking the bank!
+            At BrandBounce, we deliver bold design and strategy solutions for
+            small businesses—smartly priced for your goals and growth.
           </p>
         </div>
 
@@ -85,7 +90,11 @@ const Pricing = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((service, index) => (
               <BlurFade key={index} delay={0.1 + index * 0.1} inView>
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden h-full">
+                <div
+                  className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden h-full ${
+                    service.category === "Graphic Design" ? "md:col-span-2" : ""
+                  }`}
+                >
                   <div className={`service-category-card ${service.color}`}>
                     <h5 className="text-white text-xl font-bold">
                       {service.category}
@@ -93,11 +102,10 @@ const Pricing = () => {
                   </div>
 
                   <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Left - Price Range */}
                     <div className="flex flex-col justify-between bg-gradient-to-br from-brand-blue/10 to-white dark:from-gray-800 dark:to-gray-900 border border-brand-blue/20 dark:border-white/10 p-6 rounded-xl shadow-md">
                       <div>
                         <h6 className="text-lg font-semibold text-brand-blue mb-2">
-                          Price Range
+                          Price
                         </h6>
                         <p className="text-3xl font-bold text-brand-blue">
                           {service.price}
@@ -105,27 +113,25 @@ const Pricing = () => {
                       </div>
                       <div className="mt-4">
                         <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Choose a plan based on your needs and budget. All
-                          packages include quality assurance and timely
-                          delivery.
+                          Designed for flexibility and value across business
+                          stages.
                         </p>
                       </div>
                     </div>
 
-                    {/* Right - Deliverables */}
                     <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-6 rounded-xl shadow-sm">
                       <h6 className="text-lg font-semibold text-brand-orange mb-4">
-                        What's Included
+                        What’s Included
                       </h6>
                       <ul className="space-y-3">
-                        {service.deliverables.map((deliverable, i) => (
+                        {service.deliverables.map((item, i) => (
                           <li key={i} className="flex items-start">
                             <Check
                               className="text-brand-orange mr-3 mt-1"
                               size={20}
                             />
                             <span className="text-sm text-gray-700 dark:text-gray-200">
-                              {deliverable}
+                              {item}
                             </span>
                           </li>
                         ))}
@@ -138,23 +144,24 @@ const Pricing = () => {
           </div>
         </div>
 
+        {/* Existing Starter Kit section remains as-is below */}
+
         <BlurFade delay={0.5} inView>
           <div className="bg-[#0a2540] rounded-xl shadow-xl p-8 text-white">
-            <h4 className="text-2xl font-bold mb-4">
-              BrandBounce Bounce Starter Kit
-            </h4>
+            <h4 className="text-2xl font-bold mb-4">BrandBounce Starter Kit</h4>
             <p className="mb-6">
-              Get the full bounce with our all-in-one package—and save!
+              Kickstart your brand with our all-in-one package—perfect for small
+              businesses and startups.
             </p>
 
             <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
               <div className="flex flex-col md:flex-row justify-between items-center mb-6">
                 <div>
-                  <p className="text-3xl font-bold">£500</p>
-                  <p className="text-lg">Save 10% (£50 off)</p>
+                  <p className="text-3xl font-bold">£750</p>
+                  <p className="text-lg">Save 15% vs. individual pricing</p>
                 </div>
                 <div>
-                  <p className="text-lg">Timeline: 6-8 weeks</p>
+                  <p className="text-lg">Timeline: 2–3 weeks</p>
                 </div>
               </div>
 
@@ -164,43 +171,36 @@ const Pricing = () => {
                   <ul className="space-y-2">
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>Full Branding Package (£300 value)</span>
+                      <span>Logo Design (Starter Tier)</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>1 Pro Video Edit (up to 1 minute, £90 value)</span>
+                      <span>Brand Discovery (Lite)</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>
-                        1 Month of Growth Package Social Media Marketing (£200
-                        value)
-                      </span>
+                      <span>Social Media Setup (1 platform)</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>3 Graphic Design Assets (£60 value)</span>
+                      <span>1 Custom Graphic Design Asset</span>
                     </li>
                   </ul>
                 </div>
                 <div>
-                  <h5 className="font-bold mb-3">Good to Know:</h5>
+                  <h5 className="font-bold mb-3">Benefits:</h5>
                   <ul className="space-y-2">
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>
-                        Custom Quotes: Need more? Email us for a bespoke quote.
-                      </span>
+                      <span>15% package discount</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>
-                        Extra Revisions: £15 per round beyond what's included.
-                      </span>
+                      <span>Priority onboarding</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="mr-2 flex-shrink-0" size={18} />
-                      <span>Rush Fees: Add 15% for 48-hour delivery.</span>
+                      <span>Cohesive brand foundation</span>
                     </li>
                   </ul>
                 </div>
