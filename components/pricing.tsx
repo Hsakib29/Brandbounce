@@ -38,7 +38,7 @@ const services = [
     color: "service-category-gray",
     price: "£250–£1350",
     deliverables: [
-      "Setup: £250–£600 (3 platforms, content plan)",
+      "Setup: 3 platforms, content plan",
       "Starter: £450/mo, 6 posts, engagement, 1 platform",
       "Premium: £1350/mo, 18 posts, full ads & reporting",
     ],
@@ -48,9 +48,9 @@ const services = [
     color: "service-category-blue",
     price: "£75–£1200",
     deliverables: [
-      "Starter: £75–£250 (1 design item, 1 revision)",
-      "Core: £250–£600 (multi-page, infographics)",
-      "Premium: £600–£1200 (bespoke collateral, style guide)",
+      "Starter: 1 design item, 1 revision",
+      "Core: Multi-page, infographics",
+      "Premium: Bespoke collateral, style guide",
     ],
   },
 ];
@@ -105,10 +105,11 @@ const Pricing = () => {
                     <div className="flex flex-col justify-between bg-gradient-to-br from-brand-blue/10 to-white dark:from-gray-800 dark:to-gray-900 border border-brand-blue/20 dark:border-white/10 p-6 rounded-xl shadow-md">
                       <div>
                         <h6 className="text-lg font-semibold text-brand-blue mb-2">
-                          Price
+                          Starting Price
                         </h6>
+
                         <p className="text-3xl font-bold text-brand-blue">
-                          {service.price}
+                          {service.price.split("–")[0].replace("+", "").trim()}
                         </p>
                       </div>
                       <div className="mt-4">

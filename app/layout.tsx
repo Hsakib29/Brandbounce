@@ -74,10 +74,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="canonical" href="https://brandbounce.com" />
-  <meta name="theme-color" content="#1E90FF" />
-</head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href="https://brandbounce.com" />
+        <meta name="theme-color" content="#1E90FF" />
+        {/* Add the preconnect links here */}
+        <link rel="preconnect" href="https://player.vimeo.com" />
+        <link
+          rel="preconnect"
+          href="https://i.vimeocdn.com"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={`${poppins.variable} font-poppins`}>
         <ThemeProvider defaultTheme="light">
           <ModalProvider>
