@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-// import Image from "next/image"; // Removed next/image
 import Link from "next/link";
 import {
   ArrowRight,
@@ -12,25 +11,25 @@ import {
   Globe,
   Shield,
   Sparkles,
-} from "lucide-react"; // Ensuring all icons are imported
+} from "lucide-react";
 
 export default function TaskBounceWrapper() {
   const [isVisible, setIsVisible] = useState(false);
-  const [showBanner, setShowBanner] = useState(true); // Added state for banner visibility
+  const [showBanner, setShowBanner] = useState(true);
 
   const handleBannerClick = () => {
     setIsVisible((prev) => !prev);
-    setShowBanner(false); // Hide banner on click
+    setShowBanner(false);
   };
 
   return (
     <div className="w-full">
-      {showBanner && ( // Conditionally render the banner
+      {showBanner && (
         <div className="mb-4">
           {/* Collapsed State: Banner */}
           <div
-            className="bg-gradient-to-r from-teal-50 to-blue-50 border border-gray-200 dark:border-gray-800 rounded-xl shadow-md p-4 flex items-center justify-between w-full max-w-5xl mx-auto cursor-pointer"
-            onClick={handleBannerClick} // Use the new handler
+            className="bg-blue-50 dark:bg-[#111827] dark:text-white border border-gray-200 dark:border-gray-800 rounded-xl shadow-md p-4 flex items-center justify-between w-full max-w-5xl mx-auto cursor-pointer"
+            onClick={handleBannerClick}
           >
             <div className="flex items-center gap-6">
               {/* Virtual Assistant Image */}
@@ -171,14 +170,7 @@ function TaskBouncePromo() {
               className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1"
             >
               <div className="h-40 relative overflow-hidden">
-                {/* <Image  // Removed Next.js Image
-                  src={feature.image}
-                  alt={feature.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                /> */}
-                <img // Replaced with standard img tag
+                <img
                   src={feature.image}
                   alt={feature.title}
                   style={{
@@ -220,14 +212,7 @@ function TaskBouncePromo() {
         <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden mb-16">
           <div className="md:flex">
             <div className="md:w-1/2 relative h-64 md:h-auto">
-              {/* <Image // Removed Next.js Image
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200"
-                alt="Virtual team collaboration"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              /> */}
-              <img // Replaced with standard img tag
+              <img
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200"
                 alt="Virtual team collaboration"
                 style={{
