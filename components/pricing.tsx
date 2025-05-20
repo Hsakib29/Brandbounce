@@ -1,12 +1,31 @@
+// pricing.tsx
 "use client";
 import { Check } from "lucide-react";
 import { BlurFade } from "./blur-fade";
+import PriceDisplay, { ServicePrice } from "./PriceDisplay"; // Import the new PriceDisplay and its types
 
-const services = [
+// --- Pre-converted Prices Data ---
+// You will need to manually pre-convert these prices.
+// Exchange rates used for demonstration (adjust as needed):
+// 1 GBP = 1.25 USD
+// 1 GBP = 1.15 EUR (for example, if you add EUR)
+
+interface ServiceItem {
+  category: string;
+  color: string;
+  prices: ServicePrice; // Use the new ServicePrice type for single prices
+  deliverables: string[];
+}
+
+const services: ServiceItem[] = [
   {
     category: "Logo Design",
     color: "service-category-blue",
-    price: "£175–£650",
+    prices: {
+      GBP: 175,
+      USD: 218.75, // 175 * 1.25
+      EUR: 201.25, // 175 * 1.15
+    },
     deliverables: [
       "Starter: 2 concepts, 1 revision, PNG/JPEG files",
       "Core: 4 concepts, 2 revisions, vector & guidelines",
@@ -16,7 +35,11 @@ const services = [
   {
     category: "Branding",
     color: "service-category-orange",
-    price: "£450–£2250",
+    prices: {
+      GBP: 450,
+      USD: 562.5, // 450 * 1.25
+      EUR: 517.5, // 450 * 1.15
+    },
     deliverables: [
       "Brand Strategy: Research, positioning, audience, values",
       "Visual Identity: Logo, palette, typography, templates",
@@ -26,9 +49,15 @@ const services = [
   {
     category: "Video Editing",
     color: "service-category-navy",
-    price: "£150–£1000+",
+    // Keep as string if the internal pricing like "£50/min" is what needs to be displayed
+    // The PriceDisplay will attempt to replace the symbol.
+    prices: {
+      GBP: "£150", // Changed from range to single starting price
+      USD: "$187.50", // 150 * 1.25 (as a starting point string)
+      EUR: "€172.50", // 150 * 1.15 (as a starting point string)
+    },
     deliverables: [
-      "Basic: £50/min, cuts, text overlays, 1 revision",
+      "Basic: £50/min, cuts, text overlays, 1 revision", // These might still show GBP unless separately converted
       "Standard: £100/min, motion graphics, 2 revisions",
       "Premium: £200/min, VFX, sound mixing, 3 revisions",
     ],
@@ -36,17 +65,23 @@ const services = [
   {
     category: "Social Media Marketing",
     color: "service-category-gray",
-    price: "£250–£1350",
+    prices: {
+      GBP: 250,
+      USD: 312.5, // 250 * 1.25
+    },
     deliverables: [
       "Setup: 3 platforms, content plan",
-      "Starter: £450/mo, 6 posts, engagement, 1 platform",
-      "Premium: £1350/mo, 18 posts, full ads & reporting",
-    ],
+      "Starter: £450/mo, 6 posts, engagement, 1 platform", // Still GBP
+      "Premium: £1350/mo, 18 posts, full ads & reporting", // Still GBP
+    ], // <-- CORRECTED: Removed the 'Z' here
   },
   {
     category: "Graphic Design",
     color: "service-category-blue",
-    price: "£75–£1200",
+    prices: {
+      GBP: 75,
+      USD: 93.75, // 75 * 1.25
+    },
     deliverables: [
       "Starter: 1 design item, 1 revision",
       "Core: Multi-page, infographics",
@@ -55,7 +90,15 @@ const services = [
   },
 ];
 
+// --- Pricing Component ---
 const Pricing = () => {
+  // Pre-converted price for the Starter Kit
+  const starterKitPrice = {
+    GBP: 750,
+    USD: 937.5, // 750 * 1.25
+    EUR: 862.5, // 750 * 1.15
+  };
+
   return (
     <section id="pricing" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
@@ -109,7 +152,8 @@ const Pricing = () => {
                         </h6>
 
                         <p className="text-3xl font-bold text-brand-blue">
-                          {service.price.split("–")[0].replace("+", "").trim()}
+                          {/* Use PriceDisplay component here */}
+                          <PriceDisplay priceData={service.prices} />
                         </p>
                       </div>
                       <div className="mt-4">
@@ -158,7 +202,10 @@ const Pricing = () => {
             <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
               <div className="flex flex-col md:flex-row justify-between items-center mb-6">
                 <div>
-                  <p className="text-3xl font-bold">£750</p>
+                  <p className="text-3xl font-bold">
+                    {/* Use PriceDisplay for the Starter Kit price */}
+                    <PriceDisplay priceData={starterKitPrice} />
+                  </p>
                   <p className="text-lg">Save 15% vs. individual pricing</p>
                 </div>
                 <div>
