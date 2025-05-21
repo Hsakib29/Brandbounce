@@ -3,10 +3,7 @@
 import { Check } from "lucide-react";
 import { BlurFade } from "./blur-fade";
 import PriceDisplay, { ServicePrice } from "./PriceDisplay";
-// Change this line:
-import { convertTextPrices } from "../utils/currencyConverter"; // <--- UPDATED IMPORT PATH
-
-// ... rest of your Pricing.tsx code remains the same ...
+import { convertTextPrices } from "../utils/currencyConverter"; // <--- NEW IMPORT
 
 interface ServiceItem {
   category: string;
@@ -53,6 +50,7 @@ const services: ServiceItem[] = [
       EUR: "€172.50", // 150 * 1.15
     },
     deliverables: [
+      // These are the strings that will now be processed by convertTextPrices
       "Basic: £50/min, cuts, text overlays, 1 revision",
       "Standard: £100/min, motion graphics, 2 revisions",
       "Premium: £200/min, VFX, sound mixing, 3 revisions",
@@ -64,10 +62,11 @@ const services: ServiceItem[] = [
     prices: {
       GBP: 250,
       USD: 312.5, // 250 * 1.25
-      EUR: 287.5, // 250 * 1.15  <-- ADDED EUR PRICE
+      EUR: 287.5, // 250 * 1.15
     },
     deliverables: [
       "Setup: 3 platforms, content plan",
+      // These are the strings that will now be processed by convertTextPrices
       "Starter: £450/mo, 6 posts, engagement, 1 platform",
       "Premium: £1350/mo, 18 posts, full ads & reporting",
     ],
@@ -78,7 +77,7 @@ const services: ServiceItem[] = [
     prices: {
       GBP: 75,
       USD: 93.75, // 75 * 1.25
-      EUR: 86.25, // 75 * 1.15  <-- ADDED EUR PRICE
+      EUR: 86.25, // 75 * 1.15
     },
     deliverables: [
       "Starter: 1 design item, 1 revision",
@@ -171,8 +170,9 @@ const Pricing = () => {
                               className="text-brand-orange mr-3 mt-1"
                               size={20}
                             />
+                            {/* Apply the new conversion function here */}
                             <span className="text-sm text-gray-700 dark:text-gray-200">
-                              {item}
+                              {convertTextPrices(item)}
                             </span>
                           </li>
                         ))}
