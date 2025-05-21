@@ -19,21 +19,10 @@ const PriceDisplay: React.FC<PriceDisplayProps> = ({ priceData }) => {
   const [displayPrice, setDisplayPrice] = useState<string>("Loading...");
 
   useEffect(() => {
-    // --- DEBUGGING LOGS (Will appear in browser console) ---
     const userCurrencyCode = Cookies.get("user-currency-code") || "GBP";
-    console.log(
-      'PriceDisplay useEffect: Cookie "user-currency-code":',
-      userCurrencyCode
-    );
-    console.log("PriceDisplay useEffect: priceData prop:", priceData);
 
     const currentPriceValue =
       priceData[userCurrencyCode as keyof ServicePrice] || priceData.GBP;
-    console.log(
-      "PriceDisplay useEffect: Selected price value for display:",
-      currentPriceValue
-    );
-    // --- END DEBUGGING LOGS ---
 
     if (currentPriceValue !== undefined && currentPriceValue !== null) {
       if (typeof currentPriceValue === "number") {

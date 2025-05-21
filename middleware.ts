@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  // --- DEBUGGING LOGS ---
-  const country = request.headers.get('x-vercel-ip-country') || 'GB';
-  console.log('Middleware: Header country =', country);
+  // Access the country code from the 'x-vercel-ip-country' header
+  // This header is explicitly set by Vercel's Edge Network.
+  const country = request.headers.get('x-vercel-ip-country') || 'GB'; // Default to 'GB' if header is not present
 
   let currencyCode = 'GBP';
   let currencySymbol = '£';
@@ -17,8 +17,7 @@ export function middleware(request: NextRequest) {
     currencyCode = 'EUR';
     currencySymbol = '€';
   }
-
-  console.log(`Middleware: Setting currency for ${country}: ${currencyCode} (${currencySymbol})`);
+  // Add more country-to-currency mappings as needed
 
   const response = NextResponse.next();
   response.cookies.set('user-currency-code', currencyCode, { path: '/' });
@@ -27,7 +26,6 @@ export function middleware(request: NextRequest) {
   return response;
 }
 
-// Apply middleware to all paths except static files
 export const config = {
-  matcher: ['/', '/((?!_next|.*\\..*).*)'],
+  matcher: '/', // Apply middleware to all requests
 };

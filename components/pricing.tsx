@@ -2,18 +2,16 @@
 "use client";
 import { Check } from "lucide-react";
 import { BlurFade } from "./blur-fade";
-import PriceDisplay, { ServicePrice } from "./PriceDisplay"; // Import the new PriceDisplay and its types
+import PriceDisplay, { ServicePrice } from "./PriceDisplay";
+// Change this line:
+import { convertTextPrices } from "../utils/currencyConverter"; // <--- UPDATED IMPORT PATH
 
-// --- Pre-converted Prices Data ---
-// You will need to manually pre-convert these prices.
-// Exchange rates used for demonstration (adjust as needed):
-// 1 GBP = 1.25 USD
-// 1 GBP = 1.15 EUR (for example, if you add EUR)
+// ... rest of your Pricing.tsx code remains the same ...
 
 interface ServiceItem {
   category: string;
   color: string;
-  prices: ServicePrice; // Use the new ServicePrice type for single prices
+  prices: ServicePrice;
   deliverables: string[];
 }
 
@@ -49,15 +47,13 @@ const services: ServiceItem[] = [
   {
     category: "Video Editing",
     color: "service-category-navy",
-    // Keep as string if the internal pricing like "£50/min" is what needs to be displayed
-    // The PriceDisplay will attempt to replace the symbol.
     prices: {
-      GBP: "£150", // Changed from range to single starting price
-      USD: "$187.50", // 150 * 1.25 (as a starting point string)
-      EUR: "€172.50", // 150 * 1.15 (as a starting point string)
+      GBP: "£150",
+      USD: "$187.50", // 150 * 1.25
+      EUR: "€172.50", // 150 * 1.15
     },
     deliverables: [
-      "Basic: £50/min, cuts, text overlays, 1 revision", // These might still show GBP unless separately converted
+      "Basic: £50/min, cuts, text overlays, 1 revision",
       "Standard: £100/min, motion graphics, 2 revisions",
       "Premium: £200/min, VFX, sound mixing, 3 revisions",
     ],
@@ -68,12 +64,13 @@ const services: ServiceItem[] = [
     prices: {
       GBP: 250,
       USD: 312.5, // 250 * 1.25
+      EUR: 287.5, // 250 * 1.15  <-- ADDED EUR PRICE
     },
     deliverables: [
       "Setup: 3 platforms, content plan",
-      "Starter: £450/mo, 6 posts, engagement, 1 platform", // Still GBP
-      "Premium: £1350/mo, 18 posts, full ads & reporting", // Still GBP
-    ], // <-- CORRECTED: Removed the 'Z' here
+      "Starter: £450/mo, 6 posts, engagement, 1 platform",
+      "Premium: £1350/mo, 18 posts, full ads & reporting",
+    ],
   },
   {
     category: "Graphic Design",
@@ -81,6 +78,7 @@ const services: ServiceItem[] = [
     prices: {
       GBP: 75,
       USD: 93.75, // 75 * 1.25
+      EUR: 86.25, // 75 * 1.15  <-- ADDED EUR PRICE
     },
     deliverables: [
       "Starter: 1 design item, 1 revision",
@@ -90,7 +88,6 @@ const services: ServiceItem[] = [
   },
 ];
 
-// --- Pricing Component ---
 const Pricing = () => {
   // Pre-converted price for the Starter Kit
   const starterKitPrice = {
@@ -152,7 +149,6 @@ const Pricing = () => {
                         </h6>
 
                         <p className="text-3xl font-bold text-brand-blue">
-                          {/* Use PriceDisplay component here */}
                           <PriceDisplay priceData={service.prices} />
                         </p>
                       </div>
@@ -189,8 +185,6 @@ const Pricing = () => {
           </div>
         </div>
 
-        {/* Existing Starter Kit section remains as-is below */}
-
         <BlurFade delay={0.5} inView>
           <div className="bg-[#0a2540] rounded-xl shadow-xl p-8 text-white">
             <h4 className="text-2xl font-bold mb-4">BrandBounce Starter Kit</h4>
@@ -203,7 +197,6 @@ const Pricing = () => {
               <div className="flex flex-col md:flex-row justify-between items-center mb-6">
                 <div>
                   <p className="text-3xl font-bold">
-                    {/* Use PriceDisplay for the Starter Kit price */}
                     <PriceDisplay priceData={starterKitPrice} />
                   </p>
                   <p className="text-lg">Save 15% vs. individual pricing</p>
