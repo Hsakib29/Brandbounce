@@ -1,24 +1,26 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { TaskbounceNav } from "@/components/taskbounce/taskbounce-nav"
-import { TaskbounceFooter } from "@/components/taskbounce/taskbounce-footer"
-import { motion, AnimatePresence } from "framer-motion"
+import { TaskbounceFooter } from "@/components/taskbounce/taskbounce-footer";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function TaskbounceLayoutClient({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <div className="flex min-h-screen flex-col">
-      <TaskbounceNav />
       <AnimatePresence>
-        <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1">
+        <motion.main
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="flex-1"
+        >
           {children}
         </motion.main>
       </AnimatePresence>
       <TaskbounceFooter />
     </div>
-  )
+  );
 }
