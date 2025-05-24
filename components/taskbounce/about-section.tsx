@@ -8,13 +8,20 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 relative overflow-hidden"
+      className="w-screen py-12 md:py-24 lg:py-32 bg-gray-50 relative overflow-hidden"
+      style={{
+        backgroundImage: `url('/images/aboutbackground.webp')`, // Local image from public/images
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundBlendMode: "overlay",
+        backgroundColor: "rgba(249, 250, 251, 0.9)", // Slightly opaque bg-gray-50
+      }}
     >
-      {/* ... (Background circles remain the same) */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#26A69A]/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FF7043]/10 rounded-full blur-3xl"></div>
+      {/* Background circles */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#26A69A]/10 rounded-full blur-3xl z-0"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FF7043]/10 rounded-full blur-3xl z-0"></div>
 
-      <div className="container mx-auto px-4 md:px-6 relative">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           <FadeInSection>
             <div>
@@ -49,7 +56,6 @@ export function AboutSection() {
           </FadeInSection>
 
           <FadeInSection delay={0.2}>
-            {/* ... (Checklist section remains mostly the same) */}
             <div className="flex justify-center">
               <div className="relative w-full max-w-md">
                 <div className="absolute -left-4 -top-4 h-72 w-72 rounded-full bg-[#26A69A]/10 blur-3xl"></div>

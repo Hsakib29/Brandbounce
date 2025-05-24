@@ -118,14 +118,16 @@ function PricingCard({
         transition={{ type: "spring", stiffness: 300 }}
         className="flex h-full"
       >
-        <Card className="relative flex flex-col h-full w-full border-none shadow-xl min-h-[450px]">
+        <Card className="relative flex flex-col w-full border-none shadow-xl h-[480px]">
+          {" "}
+          {/* Fixed height */}
           <div
             className="absolute inset-0 opacity-5"
             style={{
               background: `linear-gradient(to bottom, ${colors.primary}, ${colors.secondary})`,
             }}
           />
-          <CardHeader className="relative pt-8 pb-4 z-10">
+          <CardHeader className="relative pt-6 pb-4 z-10">
             {badgeText && (
               <div
                 className="mb-4 text-center bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold z-10 shadow"
@@ -139,8 +141,8 @@ function PricingCard({
               {description}
             </CardDescription>
           </CardHeader>
-          <CardContent className="relative flex flex-col flex-grow justify-between z-10">
-            <div className="flex flex-col flex-grow">
+          <CardContent className="relative flex flex-col flex-grow justify-between z-10 pt-2">
+            <div className="flex flex-col">
               <div className="text-4xl font-bold text-center">
                 {price}
                 <span className="text-lg font-normal text-gray-500">
@@ -151,16 +153,18 @@ function PricingCard({
               <p className="text-sm text-gray-500 mt-2 text-center">
                 {details}
               </p>
-              <ul className="mt-4 space-y-2 flex-grow">
+              <ul className="mt-4 space-y-2 flex-grow max-h-32 overflow-hidden">
+                {" "}
+                {/* Limit feature list height */}
                 {features.map((feature: string) => (
                   <li key={feature} className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span>{feature}</span>
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                    <span className="text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="mt-6">
+            <div className="mt-4">
               <Button
                 className="w-full"
                 style={{ backgroundColor: colors.primary }}
