@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -12,9 +12,30 @@ import { AuroraBackground } from "./ui/aurora-background";
 
 const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Pause animation when hero is not visible to improve performance
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="pt-28 pb-16 md:pt-32 md:pb-20 bg-white dark:bg-gray-900 relative">
+    <section
+      ref={heroRef}
+      className="pt-28 pb-16 md:pt-32 md:pb-20 bg-white dark:bg-gray-900 relative"
+    >
       <AuroraBackground
         className="absolute top-0 left-0 w-full h-full z-0 opacity-70"
         children={undefined}
@@ -115,12 +136,24 @@ const Hero = () => {
           <BlurFade delay={0.7} inView>
             <div className="logo-ticker-wrapper w-full overflow-hidden">
               <div className="logo-ticker-container w-screen">
-                <div className="flex items-center logo-ticker space-x-8 py-4 animate-ticker">
-                  {[...Array(3)].flatMap((_, repeatIndex) =>
+                <div
+                  className={`flex items-center logo-ticker space-x-8 py-4 ${
+                    isVisible ? "animate-ticker" : ""
+                  }`}
+                  style={{
+                    willChange: "transform",
+                    transform: "translateZ(0)", // Force hardware acceleration
+                  }}
+                >
+                  {/* Reduced repetitions from 3 to 2 for better performance */}
+                  {[...Array(2)].flatMap((_, repeatIndex) =>
                     [...Array(8)].map((_, index) => (
                       <div
                         key={`${repeatIndex}-${index}`}
                         className="flex-shrink-0 flex items-center justify-center"
+                        style={{
+                          transform: "translateZ(0)", // Force hardware acceleration for each item
+                        }}
                       >
                         <Image
                           src={`/images/logo${index + 1}.webp`}
@@ -128,6 +161,8 @@ const Hero = () => {
                           width={80}
                           height={80}
                           className="h-auto max-h-20 w-auto object-contain dark:hidden"
+                          loading="lazy"
+                          quality={75}
                         />
                         <Image
                           src={`/images/logo${index + 1}-white.webp`}
@@ -135,6 +170,8 @@ const Hero = () => {
                           width={80}
                           height={80}
                           className="h-auto max-h-20 w-auto object-contain hidden dark:block"
+                          loading="lazy"
+                          quality={75}
                         />
                       </div>
                     ))

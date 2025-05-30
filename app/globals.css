@@ -142,7 +142,7 @@
   transform: translateY(-10px);
 }
 
-/* Logo ticker with fading effect */
+/* Logo ticker with performance optimizations */
 .logo-ticker-container {
   position: relative;
   overflow: hidden;
@@ -152,7 +152,6 @@
 
 .logo-ticker {
   display: flex;
-  animation: ticker 100s linear infinite; /* Adjust speed as needed */
   width: max-content; /* Ensures the content spans beyond the container */
   flex-shrink: 0; /* Prevents the ticker from shrinking */
 }
@@ -161,13 +160,40 @@
   margin-right: 20px; /* Space between logos */
 }
 
+/* Optimized ticker animation */
 @keyframes ticker {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translate3d(-50%, 0, 0);
   }
+}
+
+.animate-ticker {
+  animation: ticker 30s linear infinite;
+  /* Use will-change to optimize for transform animations */
+  will-change: transform;
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+  /* Prevent subpixel rendering issues */
+  backface-visibility: hidden;
+  /* Improve text rendering during animation */
+  -webkit-font-smoothing: antialiased;
+  /* Optimize for performance */
+  contain: layout style paint;
+}
+
+/* Pause animation when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation-play-state: paused;
+  }
+}
+
+/* Optional: Pause on hover for better UX */
+.logo-ticker-wrapper:hover .animate-ticker {
+  animation-play-state: paused;
 }
 
 .btn-primary {

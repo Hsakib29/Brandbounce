@@ -48,6 +48,7 @@ const Header = () => {
                 width={60}
                 height={60}
                 className="rounded-full"
+                unoptimized
               />
             </motion.div>
             <div className="text-xl font-bold">
