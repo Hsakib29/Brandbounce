@@ -84,9 +84,10 @@ export function BlurFade({
       }
       transition={transition}
       className={className}
-      style={style}
-      // Performance optimizations
-      will-change="transform, opacity, filter"
+      style={{
+        willChange: "transform, opacity, filter",
+        ...style,
+      }}
     >
       {children}
     </motion.div>

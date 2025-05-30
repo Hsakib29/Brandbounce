@@ -173,6 +173,13 @@ const Header = () => {
             >
               Pricing
             </Link>
+            <Link
+              href="/taskbounce"
+              className="text-gray-800 dark:text-gray-200 hover:text-brand-blue transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              TaskBounce
+            </Link>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
