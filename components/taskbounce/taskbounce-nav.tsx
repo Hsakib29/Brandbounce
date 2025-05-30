@@ -101,7 +101,6 @@ export const TaskbounceNav: FC = () => {
           </Button>
         </div>
       </div>
-
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <motion.div

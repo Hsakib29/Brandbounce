@@ -11,9 +11,9 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export function BrandBouncePromo() {
-  // Sparkles animation variants
   const sparklesVariants = {
     initial: {
       opacity: 0,
@@ -36,9 +36,23 @@ export function BrandBouncePromo() {
     }),
   };
 
-  // Generate multiple sparkles
-  const generateSparkles = (count: number) => {
-    return Array.from({ length: count }).map((_, i) => (
+  const [sparkles, setSparkles] = useState<
+    { left: string; top: string; fontSize: string }[]
+  >([]);
+
+  useEffect(() => {
+    const generateSparkleLayout = (count: number) => {
+      return Array.from({ length: count }).map(() => ({
+        left: `${10 + Math.floor(Math.random() * 70)}%`,
+        top: `${10 + Math.floor(Math.random() * 60)}%`,
+        fontSize: `${0.8 + Math.random() * 0.6}rem`,
+      }));
+    };
+    setSparkles(generateSparkleLayout(12));
+  }, []);
+
+  const generateSparkles = () =>
+    sparkles.map((s, i) => (
       <motion.span
         key={i}
         custom={i}
@@ -46,26 +60,19 @@ export function BrandBouncePromo() {
         initial="initial"
         animate="animate"
         className="absolute text-[#FF6200]"
-        style={{
-          left: `${10 + (i % 5) * 15}%`,
-          top: `${10 + (i % 3) * 25}%`,
-          fontSize: `${0.5 + Math.random()}rem`,
-        }}
+        style={s}
       >
         <Sparkles className="w-4 h-4" />
       </motion.span>
     ));
-  };
 
   return (
     <section className="w-full py-20 bg-gradient-to-br from-[#1E90FF]/5 to-[#FF6200]/5 overflow-hidden relative">
-      {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-[#1E90FF]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#FF6200]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
 
-      {/* Floating sparkles in the background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {generateSparkles(12)}
+        {generateSparkles()}
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative">
@@ -115,7 +122,6 @@ export function BrandBouncePromo() {
               >
                 <Sparkles className="w-5 h-5 text-[#FF6200]" />
               </motion.span>
-              {/* Small sparkles around the logo */}
               {Array.from({ length: 3 }).map((_, i) => (
                 <motion.span
                   key={i}
@@ -284,7 +290,7 @@ export function BrandBouncePromo() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <Link href="/" passHref legacyBehavior>
+          <Link href="/">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -307,7 +313,6 @@ export function BrandBouncePromo() {
                 </motion.div>
               </span>
               <span className="absolute inset-0 bg-gray-800 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              {/* Button sparkles */}
               <motion.span
                 initial={{ scale: 0, opacity: 0 }}
                 whileHover={{

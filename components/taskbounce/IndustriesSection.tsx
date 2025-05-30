@@ -4,13 +4,14 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-// Define types for industry card data
 interface IndustryCard {
   title: string;
   icon: string;
   description: string;
-  imageUrl: string;
+  imagePath: string;
   altText: string;
+  width: number;
+  height: number;
 }
 
 const industries: IndustryCard[] = [
@@ -19,61 +20,67 @@ const industries: IndustryCard[] = [
     icon: "🏢",
     description:
       "Scale your dev team with on-demand engineers, UX designers, and interim CTOs.",
-    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    imagePath: "/images/techstartup.webp",
     altText: "Developer at a standup meeting",
+    width: 400,
+    height: 300,
   },
   {
     title: "E-Commerce",
     icon: "📦",
     description:
       "Flexible logistics, marketing, and customer support specialists for peak seasons.",
-    imageUrl:
-      "https://images.pexels.com/photos/4480505/pexels-photo-4480505.jpeg",
+    imagePath: "/images/ecommerce.webp",
     altText: "Warehouse worker scanning inventory",
+    width: 400,
+    height: 300,
   },
   {
     title: "Healthcare",
     icon: "🏥",
     description:
       "HIPAA-compliant developers and consultants for sensitive projects.",
-    imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d",
+    imagePath: "/images/healthcare.webp",
     altText: "Doctor reviewing data on tablet",
+    width: 400,
+    height: 300,
   },
-  // Add more industries as needed
   {
     title: "Finance",
     icon: "💰",
     description:
       "Secure data analysts and compliance experts for financial operations.",
-    imageUrl: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f",
+    imagePath: "/images/finance.webp",
     altText: "Financial analyst reviewing charts",
+    width: 400,
+    height: 300,
   },
   {
     title: "Nonprofits",
     icon: "🤝",
     description:
       "Grant writers and event coordinators to amplify your mission.",
-    imageUrl:
-      "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg",
+    imagePath: "/images/nonprofit.webp",
     altText: "Team collaborating at a nonprofit meeting",
+    width: 400,
+    height: 300,
   },
   {
     title: "Education",
     icon: "📚",
     description:
       "Curriculum developers and administrative support for educational institutions.",
-    imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+    imagePath: "/images/education.webp",
     altText: "Educators planning in a classroom",
+    width: 400,
+    height: 300,
   },
 ];
 
-const IndustriesSection: React.FC = () => {
+const IndustriesSection = () => {
   const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -84,7 +91,7 @@ const IndustriesSection: React.FC = () => {
           Industry-Tailored Expertise
         </h2>
         <p className="text-lg text-[#37474F] mb-12 font-['Source_Sans_Pro']">
-          TaskBounce connects you with specialists who speak your industry’s
+          TaskBounce connects you with specialists who speak your industry's
           language.
         </p>
       </div>
@@ -97,13 +104,15 @@ const IndustriesSection: React.FC = () => {
               key={index}
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="relative h-48">
+              <div className="relative h-48 w-full">
                 <Image
-                  src={industry.imageUrl}
+                  src={industry.imagePath}
                   alt={industry.altText}
-                  fill
-                  style={{ objectFit: "cover" }}
+                  width={industry.width}
+                  height={industry.height}
+                  className="object-cover w-full h-full"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={index < 3}
                 />
               </div>
               <div className="p-6">
@@ -142,12 +151,12 @@ const IndustriesSection: React.FC = () => {
       {/* CTA Footer */}
       <div className="container mx-auto px-4 mt-12 text-center">
         <p className="text-lg text-[#37474F] mb-6 font-['Source_Sans_Pro']">
-          No matter your sector, we’ll match you with the right talent.
+          No matter your sector, we'll match you with the right talent.
         </p>
         <Link
           href="/contact"
           className="inline-block bg-[#FF7043] text-white py-3 px-6 rounded-md hover:bg-[#26A69A] transition-colors duration-300 font-['Montserrat'] font-bold"
-          onClick={scrollToContact} // Add the onClick handler here
+          onClick={scrollToContact}
         >
           Get Industry-Specific Help →
         </Link>
