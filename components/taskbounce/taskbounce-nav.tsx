@@ -23,6 +23,18 @@ export const TaskbounceNav: FC = () => {
     }
   };
 
+  const handleSmoothScroll = (sectionId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.error(`${sectionId} section not found!`);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between gap-6">
@@ -34,30 +46,30 @@ export const TaskbounceNav: FC = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link
-            href="/taskbounce#features"
-            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
-          >
-            Features
-          </Link>
-          <Link
-            href="/taskbounce#services"
+          <button
+            onClick={handleSmoothScroll("services")}
             className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
           >
             Services
-          </Link>
-          <Link
-            href="/taskbounce#about"
+          </button>
+          <button
+            onClick={handleSmoothScroll("how-it-works")}
+            className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
+          >
+            How It Works
+          </button>
+          <button
+            onClick={handleSmoothScroll("about")}
             className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
           >
             About
-          </Link>
-          <Link
-            href="/taskbounce#contact"
+          </button>
+          <button
+            onClick={handleSmoothScroll("contact")}
             className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2"
           >
             Contact
-          </Link>
+          </button>
           <Button
             asChild
             className="bg-transparent hover:bg-gray-100 text-sm font-medium transition-all duration-200 rounded-lg px-4 py-2 shadow-sm hover:shadow-md"
@@ -110,34 +122,30 @@ export const TaskbounceNav: FC = () => {
           className="md:hidden bg-white border-t"
         >
           <div className="w-full py-4 flex flex-col space-y-4 items-center">
-            <Link
-              href="/taskbounce#features"
+            <button
+              onClick={handleSmoothScroll("services")}
               className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Features
-            </Link>
-            <Link
-              href="/taskbounce#services"
-              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
-              onClick={() => setIsMenuOpen(false)}
             >
               Services
-            </Link>
-            <Link
-              href="/taskbounce#about"
+            </button>
+            <button
+              onClick={handleSmoothScroll("how-it-works")}
               className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
-              onClick={() => setIsMenuOpen(false)}
+            >
+              How It Works
+            </button>
+            <button
+              onClick={handleSmoothScroll("about")}
+              className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
             >
               About
-            </Link>
-            <Link
-              href="/taskbounce#contact"
+            </button>
+            <button
+              onClick={handleSmoothScroll("contact")}
               className="text-sm font-medium text-gray-700 hover:text-[#26A69A] transition-colors py-2 text-center"
-              onClick={() => setIsMenuOpen(false)}
             >
               Contact
-            </Link>
+            </button>
             <Button
               asChild
               className="bg-transparent hover:bg-gray-100 text-sm font-medium transition-all duration-200 rounded-lg px-4 py-2 shadow-sm hover:shadow-md"

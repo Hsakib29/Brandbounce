@@ -46,7 +46,7 @@ export const ContactSection: React.FC = () => {
                       For general inquiries:
                     </p>
                     <p className="text-[#26A69A] font-medium text-sm">
-                      hello@taskbounce.com
+                      info@brandbounce.app
                     </p>
                   </div>
                 </div>
